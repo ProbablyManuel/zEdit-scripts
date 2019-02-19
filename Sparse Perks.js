@@ -21,13 +21,15 @@ let perkStack = [
  [`${skyrimIndex}106257`, `${skyrimIndex}106256`],  // Flurry
  [`${skyrimIndex}079343`, `${skyrimIndex}0BABE4`],  // Weapon Mastery
  [`${skyrimIndex}079346`, `${skyrimIndex}0BABE8`],  // Great Weapon Mastery
- [`${skyrimIndex}0C1E95`, `${skyrimIndex}0C1E94`, `${skyrimIndex}03AF83`],  // Greatsword Focus
- [`${skyrimIndex}0C5C07`, `${skyrimIndex}0C5C06`, `${skyrimIndex}0C5C05`],  // Battleaxe Focus
- [`${skyrimIndex}0C1E97`, `${skyrimIndex}0C1E96`, `${skyrimIndex}03AF84`],  // Warhammer Focus
- [`${skyrimIndex}0C1E91`, `${skyrimIndex}0C1E90`, `${skyrimIndex}05F56F`],  // Sword Focus
- [`${skyrimIndex}0C3679`, `${skyrimIndex}0C3678`, `${skyrimIndex}03FFFA`],  // War Axe Focus
- [`${skyrimIndex}0C1E93`, `${skyrimIndex}0C1E92`, `${skyrimIndex}05F592`],  // Mace Focus
- [`${requiemIndex}AD3998`, `${requiemIndex}AD3999`, `${requiemIndex}AD399A`]  // Dagger Focus
+ [`${skyrimIndex}0C1E95`, `${skyrimIndex}0C1E94`, `${skyrimIndex}03AF83`, `${skyrimIndex}00052D51`],  // Greatsword Focus, Barbaric Might
+ [`${skyrimIndex}0C5C07`, `${skyrimIndex}0C5C06`, `${skyrimIndex}0C5C05`, `${skyrimIndex}00052D51`],  // Battleaxe Focus, Barbaric Might
+ [`${skyrimIndex}0C1E97`, `${skyrimIndex}0C1E96`, `${skyrimIndex}03AF84`, `${skyrimIndex}00052D51`],  // Warhammer Focus, Barbaric Might
+ [`${skyrimIndex}0C1E91`, `${skyrimIndex}0C1E90`, `${skyrimIndex}05F56F`, `${skyrimIndex}052D50`],  // Sword Focus, Penetrating Strikes
+ [`${skyrimIndex}0C3679`, `${skyrimIndex}0C3678`, `${skyrimIndex}03FFFA`, `${skyrimIndex}052D50`],  // War Axe Focus, Penetrating Strikes
+ [`${skyrimIndex}0C1E93`, `${skyrimIndex}0C1E92`, `${skyrimIndex}05F592`, `${skyrimIndex}052D50`],  // Mace Focus, Penetrating Strikes
+ [`${requiemIndex}AD3998`, `${requiemIndex}AD3999`, `${requiemIndex}AD399A`, `${skyrimIndex}052D50`],  // Dagger Focus, Penetrating Strikes
+ [`${skyrimIndex}105F1E`, `${skyrimIndex}105F1C`, `${skyrimIndex}07934A`, `${skyrimIndex}0BABED`],  // Penetrating Shot, Piercing Shot, Precise Aim, Ranged Combat Training
+ [`${skyrimIndex}058F64`, `${skyrimIndex}058F62`]  // Stunning Precision, Power Shot
 ];
 
 let fileName = "RRO-449.esp";
