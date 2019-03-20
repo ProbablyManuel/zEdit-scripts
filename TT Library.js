@@ -1,21 +1,35 @@
 module.exports = {
-	GetTextBetween: function(str, delimiter) {
-		let firstIndex = -1;
-		let secondIndex = -1;
-		for (let i = 0; i < str.length; i++) {
-			if (str.charAt(i) === delimiter) {
-				if (firstIndex === -1) {
-					firstIndex = i;
-				}
-				else if (secondIndex === -1) {
-					secondIndex = i;
-				}
-			}
+	BodyPartToArmorPart: function(str) {
+		str = str.toLowerCase();
+		switch (str) {
+			case "head": return "Helmet"; 
+			case "body": return "Cuirass"; 
+			case "hand": return "Gauntlets"; 
+			case "feet": return "Boots"; 
+			default: return str;
 		}
-		if (firstIndex === -1 || secondIndex === -1) {
-			return "";
+	},
+
+	GetSetFromEditorID: function(str) {
+		return GetTextBetween(str, '_');
+	},
+
+	GetBodyPartFromEditorID: function(str) {
+		str = str.slice(str.indexOf('_') + 1);
+		bodyPart = GetTextBetween(str, '_');
+		if (bodyPart === "") {
+			return str.slice(str.indexOf('_') + 1);
 		}
-		return str.substring(firstIndex + 1, secondIndex);
+		return bodyPart;
+	},
+
+	GetWeaponTypeFromEditorID: function(str) {
+		str = str.slice(str.indexOf('_') + 1);
+		armorPart = GetTextBetween(str, '_');
+		if (armorPart === "") {
+			return str.slice(str.indexOf('_') + 1);
+		}
+		return armorPart;
 	},
 
 	GetArmorPart: function(armor) {
@@ -93,3 +107,22 @@ module.exports = {
 		return xelib.SetFloatValue(record, "DNAM\\Reach", value);
 	}
 };
+
+function GetTextBetween(str, delimiter) {
+	let firstIndex = -1;
+	let secondIndex = -1;
+	for (let i = 0; i < str.length; i++) {
+		if (str.charAt(i) === delimiter) {
+			if (firstIndex === -1) {
+				firstIndex = i;
+			}
+			else if (secondIndex === -1) {
+				secondIndex = i;
+			}
+		}
+	}
+	if (firstIndex === -1 || secondIndex === -1) {
+		return "";
+	}
+	return str.substring(firstIndex + 1, secondIndex);
+}

@@ -60,6 +60,14 @@ module.exports = {
 					case "gauntlets": return GetRecord(skyrim, 0x01B3A0);
 					case "helmet": return GetRecord(skyrim, 0x01B3A1);
 				}
+			case "steel":
+				switch (part) {
+					case "boots": return GetRecord(skyrim, 0x013951);
+					case "cuirass": return GetRecord(skyrim, 0x013952);
+					case "gauntlets": return GetRecord(skyrim, 0x013953);
+					case "helmet": return GetRecord(skyrim, 0x013954);
+					case "shield": return GetRecord(skyrim, 0x013955);
+				}
 			case "steelplate":
 				switch (part) {
 					case "boots": return GetRecord(skyrim, 0x01395B);
@@ -74,7 +82,7 @@ module.exports = {
 			// 		case "gauntlets": return GetRecord(skyrim, 0x);
 			// 		case "helmet": return GetRecord(skyrim, 0x);
 			// 		case "shield": return GetRecord(skyrim, 0x);
-			// 	}
+			// }
 			default: return 0;
 		}
 	},
