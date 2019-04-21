@@ -17,8 +17,9 @@ showProgress({
 for (let armor of selected) {
 	let armorType = xelib.GetArmorType(armor)
 	if (armorType === "Heavy Armor" || armorType === "Light Armor") {
-		let set = TTLib.GetSetFromEditorID(xelib.EditorID(armor));
-		let bodyPart = TTLib.GetBodyPartFromEditorID(xelib.EditorID(armor));
+		let editorID = xelib.EditorID(armor);
+		let set = TTLib.GetSetFromEditorID(editorID);
+		let bodyPart = TTLib.GetBodyPartFromEditorID(editorID);
 		let armorPart = TTLib.BodyPartToArmorPart(bodyPart);
 		let goldOffset = 0;
 		let goldMult = 1.0;
@@ -59,6 +60,9 @@ for (let armor of selected) {
 			baseSet = "SteelPlate";
 			goldMult *= 1.5;
 			armorMult *= 1.3;
+			if (editorID.endsWith("The")) {
+				goldMult *= 2.0;
+			}
 		}
 		else if (set === "CombinedSteel") {
 			baseSet = "SteelPlate";
@@ -109,7 +113,7 @@ for (let armor of selected) {
 			}
 		}
 		else if (set !== "NULL") {
-			logMessage(`${xelib.LongName(armor)} doesn't have a base armor. Base set is ${baseSet}`);
+			logMessage(`${xelib.LongName(armor)} doesn't have a base armor. Base set is ${baseSet} and armor part is ${armorPart}`);
 		}
 	}
 	addProgress(1);
