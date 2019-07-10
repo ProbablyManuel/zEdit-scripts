@@ -36,8 +36,8 @@ for (let weapon of selected) {
 		goldMult = 7.0;
 	}
 	else if (set === "Daedric") {
-		damageOffset = 8;
-		weightOffset = 8.0;
+		damageOffset = 7;
+		weightOffset = 7.0;
 		goldMult = 100;
 	}
 	else if (set === "Dawnguard") {
@@ -105,11 +105,6 @@ for (let weapon of selected) {
 		weightOffset = -1.0;
 		goldMult = 0.55;
 	}
-	else if (set === "LegendaryElven") {
-		damageOffset = 5;
-		weightOffset = -2.0;
-		goldMult = 30.0;
-	}
 	else if (set === "NordHero") {
 		damageOffset = 3;
 		weightOffset = -1.0;
@@ -151,7 +146,7 @@ for (let weapon of selected) {
 	}
 	else if (type === "Greatsword") {
 		baseType = "Greatsword";
-		speedOffset += 0.1;
+		speedOffset += 0.05;
 	}
 	else if (type === "Katana") {
 		baseType = "Sword";
@@ -186,11 +181,10 @@ for (let weapon of selected) {
 	}
 	else if (type === "Tanto") {
 		baseType = "Dagger";
-		damageOffset += 0.5;
+		damageOffset += 1;
 		weightOffset += 2.5;
 		speedOffset -= 0.1;
 		reachOffset += 0.1;
-		alreadyReqtified = true;
 	}
 	else {
 		baseType = type;
