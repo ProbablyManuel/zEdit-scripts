@@ -1,11 +1,10 @@
-let pluginToClean = xelib.FileByName('Requiem.esp');
-let perks = xelib.GetRecords(pluginToClean, 'PERK', true);
-let npcs = xelib.GetRecords(pluginToClean, 'NPC_', true);
+let perks = xelib.GetRecords('Requiem.esp', 'PERK', true);
+let npcs = zedit.GetSelectedRecords('NPC_');
 
 let {showProgress, logMessage, progressTitle, addProgress, progressMessage} = zedit.progressService;
 showProgress({
     determinate: true,
-    title: 'Remove Perks',
+    title: 'Remove nullified Perks',
     message : '',
     canClose: true,
     current: 0,
