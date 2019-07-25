@@ -35,6 +35,16 @@ for (let weapon of selected) {
 		weightOffset = 0.0;
 		goldMult = 7.0;
 	}
+	else if (set === "Bound") {
+		damageOffset = 1;
+		weightMult = 0.0;
+		goldMult = 0;
+	}
+	else if (set === "BoundMystic") {
+		damageOffset = 6;
+		weightMult = 0.0;
+		goldMult = 0;
+	}
 	else if (set === "Daedric") {
 		damageOffset = 7;
 		weightOffset = 7.0;
