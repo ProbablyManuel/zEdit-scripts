@@ -32,7 +32,6 @@ for (let armor of selected) {
 		if (set === "Apotheus") {
 			baseSet = "Elven";
 			goldMult *= 2.0;
-			weightMult *= 1.4;
 		}
 		else if (set === "BlackMageLight") {
 			baseSet = "Scaled";
@@ -56,6 +55,11 @@ for (let armor of selected) {
 			weightMult *= 0.8;
 			armorMult *= 1.15;
 		}
+		else if (set === "BretonKnight") {
+			baseSet = "Leather";
+			goldMult *= 2.0;
+			armorMult *= 1.5;
+		}
 		else if (set === "Blooded") {
 			baseSet = "SteelPlate";
 			goldMult *= 1.5;
@@ -67,6 +71,10 @@ for (let armor of selected) {
 		else if (set === "CombinedSteel") {
 			baseSet = "SteelPlate";
 		}
+		else if (set === "Ciri") {
+			baseSet = "Elven";
+			armorMult *= 1.25;
+		}
 		else if (set === "Duskward") {
 			baseSet = "Glass";
 			goldMult *= 0.5;
@@ -74,6 +82,9 @@ for (let armor of selected) {
 		}
 		else if (set === "ESONord") {
 			baseSet = "Steel";
+		}
+		else if (set === "Hermit") {
+			baseSet = "Leather";
 		}
 		else if (set === "Housecarl") {
 			baseSet = "SteelPlate";
@@ -91,8 +102,23 @@ for (let armor of selected) {
 		else if (set === "NordMage") {
 			baseSet = "Scaled";
 		}
+		else if (set === "Shani") {
+			baseSet = "Elven";
+			armorMult *= 1.25;
+		}
+		else if (set === "Thief") {
+			baseSet = "Leather";
+		}
+		else if (set === "Triss") {
+			baseSet = "Elven";
+			armorMult *= 1.25;
+		}
 		else if (set === "Wayfarer") {
 			baseSet = "Leather";
+		}
+		else if (set === "Yennefer") {
+			baseSet = "Elven";
+			armorMult *= 1.25;
 		}
 
 		baseArmor = Database.ArmorBySetAndPart(baseSet, armorPart);

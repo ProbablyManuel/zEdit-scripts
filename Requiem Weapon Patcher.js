@@ -42,6 +42,11 @@ for (let weapon of selected) {
 				goldOffset = 1630;
 			}
 		}
+		if (set === "BretonKnight") {
+			baseSet = "Steel";
+			damageOffset = 1;
+			goldMult = 2.0;
+		}
 		else if (set === "Housecarl") {
 			baseSet = "Steel";
 			damageOffset = 3;
