@@ -15,7 +15,6 @@ showProgress({
 });
 
 for (let weapon of selected) {
-	// Exclude staffs
 	IsBow = xelib.GetValue(weapon, "DNAM\\Animation Type") === "Bow";
 	IsCrossbow = xelib.GetValue(weapon, "DNAM\\Animation Type") === "Crossbow";
 	IsStaff = xelib.GetValue(weapon, "DNAM\\Animation Type") === "Staff";
@@ -185,12 +184,194 @@ for (let weapon of selected) {
 			weightOffset = -8.0;
 			goldMult = 0.25;
 		}
+		else if (set === "Unique") {
+			if (editorID.endsWith("Afterslash")) {
+			}
+			else if (editorID.endsWith("Alikr")) {
+				damageOffset = 2;
+				weightOffset = 1.0;
+				goldOffset = 200;
+			}
+			else if (editorID.endsWith("ArmingSword")) {
+			}
+			else if (editorID.endsWith("AsumaTrenchKnife")) {
+				baseSet = "Orcish";
+				weightOffset = 2;
+				goldOffset = 110;
+			}
+			else if (editorID.endsWith("AzurasMoon")) {
+				// Manually edited in the plugin
+			}
+			else if (editorID.endsWith("BiPolarBlade")) {
+				baseSet = "Daedric";
+				goldOffset = 20000;
+				damageOffset = 1;
+			}
+			else if (editorID.endsWith("BlackDragon")) {
+				damageOffset = 3;
+				goldOffset = 400;
+			}
+			else if (editorID.endsWith("BlueDragon")) {
+				damageOffset = 3;
+				goldOffset = 700;
+			}
+			else if (editorID.endsWith("ButchersKnife")) {
+				weightOffset = 4;
+				goldOffset = 135;
+			}
+			else if (editorID.endsWith("CaptainsSword")) {
+				goldOffset = 35;
+			}
+			else if (editorID.endsWith("Chakram")) {
+				baseSet = "Ebony";
+			}
+			else if (editorID.endsWith("Chrysamere")) {
+				baseSet = "Daedric";
+				goldOffset = 30000;
+			}
+			else if (editorID.endsWith("DaedricCleaver")) {
+				baseSet = "Daedric";
+			}
+			else if (editorID.endsWith("CrowGreatsword")) {
+				goldMult = 0;
+				goldOffset = 1400;
+				damageOffset = 3;
+				weightOffset = 1.0;
+			}
+			else if (editorID.endsWith("CrowSword")) {
+				goldMult = 0;
+				goldOffset = 900;
+				damageOffset = 3;
+				weightOffset = 1.0;
+			}
+			else if (editorID.endsWith("Dremora")) {
+				baseSet = "Daedric";
+				goldOffset = -6000;
+			}
+			 else if (editorID.endsWith("DwemerControlRod")) {
+				baseSet = "Dwarven";
+				goldOffset = 200;
+			}
+			else if (editorID.endsWith("EbonyHammer")) {
+				baseSet = "Ebony";
+			}
+			else if (editorID.endsWith("EmperorsGreatsword")) {
+				goldOffset = 800;
+				damageOffset = 3;
+			}
+			else if (editorID.endsWith("EasternDwarvenWarAxe")) {
+				baseSet = "Dwarven";
+				goldOffset = 100;
+			}
+			else if (editorID.endsWith("FleurDeLys")) {
+				baseSet = "Elven";
+			}
+			else if (editorID.endsWith("ForkOfHorripilation")) {
+				// Manually edited in the plugin
+			}
+			else if (editorID.endsWith("Goldbrand")) {
+				baseSet = "Daedric";
+				goldOffset = 6000;
+			}
+			else if (editorID.endsWith("GreatBlade")) {
+				damageOffset = 3;
+				goldMult = 4.0;
+				goldOffset = 500;
+			}
+			else if (editorID.endsWith("GreatBloodBlade")) {
+				damageOffset = 3;
+				goldMult = 4.0;
+				goldOffset = 800;
+			}
+			else if (editorID.endsWith("GreatWingsBlade")) {
+				damageOffset = 3;
+				goldMult = 4.0;
+				goldOffset = 600;
+			}
+			else if (editorID.endsWith("Greyblade")) {
+				damageOffset = 3;
+				goldOffset = 400;
+			}
+			else if (editorID.endsWith("HollowBlade")) {
+				weightOffset = 1.0;
+			}
+			else if (editorID.endsWith("HotBlood")) {
+				baseSet = "Daedric";
+				goldOffset = 1000;
+			}
+			else if (editorID.endsWith("HousecarlsGreatsword")) {
+				goldOffset = 100;
+			}
+			else if (editorID.endsWith("IceBladeOfTheMonarch")) {
+				damageOffset = 3;
+				goldOffset = 6000;
+			}
+			else if (editorID.endsWith("Justice")) {
+			}
+			else if (editorID.endsWith("MaceOfAevarStoneSinger")) {
+				baseSet = "Daedric";
+				goldOffset = 3000;
+			}
+			else if (editorID.endsWith("MalacathsCleaver")) {
+				baseSet = "Daedric";
+				goldOffset = 2000;
+			}
+			else if (editorID.endsWith("OrnateWarhammer")) {
+				baseSet = "Ebony";
+			}
+			else if (editorID.endsWith("OrgnumsDagger")) {
+				damageOffset = 4;
+				weightOffset = 2.0;
+				goldMult = 15.0;
+			}
+			else if (editorID.endsWith("Umbra")) {
+				baseSet = "Daedric";
+			}
+			else if (editorID.endsWith("Pokeblade")) {
+				damageOffset = 1;
+				goldOffset = 15;
+			}
+			else if (editorID.endsWith("Shadowsting")) {
+				baseSet = "Daedric";
+			}
+			else if (editorID.endsWith("SixthHouseBell")) {
+				baseSet = "Ebony";
+			}
+			else if (editorID.endsWith("Skull")) {
+				baseSet = "Ebony";
+			}
+			else if (editorID.endsWith("Spearblade")) {
+				goldOffset = 50;
+			}
+			else if (editorID.endsWith("Splitter")) {
+				speedOffset = 0.15;
+				reachOffset = -0.2;
+			}
+			else if (editorID.endsWith("ThresherMaul")) {
+				goldOffset = 400;
+				weightOffset = 4.0;
+				damageOffset = 3;
+				speedOffset = -0.05;
+			}
+			else if (editorID.endsWith("CeremonialGreatsword")) {
+				damageOffset = 2;
+				weightOffset = 1.0;
+				goldOffset = 400;
+			}
+			else if (editorID.endsWith("TridentBlade")) {
+				baseSet = "Dwarven";
+			}
+			else if (editorID.endsWith("Wabbajack")) {
+				baseSet = "Daedric";
+			}
+			else if (editorID.endsWith("Wraith")) {
+				baseSet = "Daedric";
+				goldOffset = 5000;
+			}
+		}
 		else {
 			baseSet = "";
 		}
-
-
-
 
 		if (type === "Anlace") {
 			baseType = "Dagger";
@@ -358,6 +539,6 @@ for (let weapon of selected) {
 		else if (set !== "NULL" && !prefixes.includes(set)) {
 			logMessage(`${xelib.LongName(weapon)} doesn't have a base weapon`);
 		}
-		addProgress(1);
 	}
+	addProgress(1);
 }
