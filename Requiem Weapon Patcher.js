@@ -16,7 +16,10 @@ showProgress({
 
 for (let weapon of selected) {
 	// Exclude staffs
-	if (true) {
+	IsBow = xelib.GetValue(weapon, "DNAM\\Animation Type") === "Bow";
+	IsCrossbow = xelib.GetValue(weapon, "DNAM\\Animation Type") === "Crossbow";
+	IsStaff = xelib.GetValue(weapon, "DNAM\\Animation Type") === "Staff";
+	if (!IsBow && !IsCrossbow && !IsStaff) {
 		let editorID = xelib.EditorID(weapon)
 		let set = TTLib.GetSetFromEditorID(editorID);
 		let type = TTLib.GetWeaponTypeFromEditorID(editorID);
@@ -27,13 +30,24 @@ for (let weapon of selected) {
 		let damageOffset = 0;
 		let damageMult = 1.0;
 		let speedOffset = 0.0;
-		let speedMult = 1.0;
 		let reachOffset = 0.0;
-		let reachMult = 1.0;
-		let baseSet = "";
+		let baseSet = "Steel";
+		let baseType = "";
+		let alreadyReqtified = false;
 
-		if (set === "Blooded") {
-			baseSet = "Steel";
+		prefixes = ["Ench", "NonPlayable", "Unique"];
+		for (let prefix of prefixes) {
+			if (set !== prefix && set.startsWith(prefix)) {
+				set = set.slice(prefix.length);
+			}
+		}
+
+		if (set === "Blades") {
+			damageOffset = 3;
+			weightOffset = 0.0;
+			goldMult = 7.0;
+		}
+		else if (set === "Blooded") {
 			damageOffset = 4;
 			weightOffset = 1.0;
 			goldMult = 7.0;
@@ -42,47 +56,307 @@ for (let weapon of selected) {
 				goldOffset = 1630;
 			}
 		}
-		if (set === "BretonKnight") {
-			baseSet = "Steel";
+		else if (set === "Bound") {
+			damageOffset = 1;
+			weightMult = 0.0;
+			goldMult = 0.0;
+		}
+		else if (set === "BoundMystic") {
+			damageOffset = 6;
+			weightMult = 0.0;
+			goldMult = 0.0;
+		}
+		else if (set === "BretonKnight") {
 			damageOffset = 1;
 			goldMult = 2.0;
 		}
+		else if (set === "Daedric") {
+			damageOffset = 7;
+			weightOffset = 7.0;
+			goldMult = 100.0;
+		}
+		else if (set === "Dawnguard") {
+			damageOffset = 2;
+			weightOffset = 1.0;
+			goldMult = 6.0;
+		}
+		else if (set === "Dragonbone") {
+			damageOffset = 6;
+			weightOffset = 6.0;
+			goldMult = 80.0;
+		}
+		else if (set === "Draugr") {
+			damageOffset = 0;
+			weightOffset = 1.0;
+			goldMult = 1 / 3;
+		}
+		else if (set === "DraugrHoned") {
+			damageOffset = 3;
+			weightOffset = 1.0;
+			goldMult = 2 / 3;
+		}
+		else if (set === "Duskward") {
+			damageOffset = 4;
+			weightOffset = 2.0;
+			goldMult = 10.0;
+		}
+		else if (set === "Dwarven") {
+			damageOffset = 1;
+			weightOffset = 1.0;
+			goldMult = 3.0;
+		}
+		else if (set === "Ebony") {
+			damageOffset = 5;
+			weightOffset = 5.0;
+			goldMult = 40.0;
+		}
+		else if (set === "Elven") {
+			damageOffset = 2;
+			weightOffset = -2.0;
+			goldMult = 4.0;
+		}
+		else if (set === "Falmer") {
+			damageOffset = -1;
+			weightOffset = 0.0;
+			goldMult = 0.25;
+		}
+		else if (set === "FalmerHoned") {
+			damageOffset = 2;
+			weightOffset = 0.0;
+			goldMult = 0.5;
+		}
+		else if (set === "Forsworn") {
+			damageOffset = -2;
+			weightOffset = -2.0;
+			goldMult = 0.2;
+		}
+		else if (set === "Glass") {
+			damageOffset = 4;
+			weightOffset = -3.0;
+			goldMult = 25.0;
+		}
 		else if (set === "Housecarl") {
-			baseSet = "Steel";
 			damageOffset = 3;
 			weightOffset = 3.0;
 			goldMult = 9.0;
 		}
-		else if (set === "Duskward") {
-			baseSet = "Glass";
-			weightOffset = 5.0;
-			goldMult *= 0.5;
+		else if (set === "Imperial") {
+			damageOffset = 0;
+			weightOffset = 0.0;
+			goldMult = 4 / 3;
+		}
+		else if (set === "Iron") {
+			damageOffset = -1;
+			weightOffset = -1.0;
+			goldMult = 0.55;
+		}
+		else if (set === "NordHero") {
+			damageOffset = 3;
+			weightOffset = -1.0;
+			goldMult = 6.0;
+		}
+		else if (set === "Orcish") {
+			damageOffset = 3;
+			weightOffset = 2.0;
+			goldMult = 5.0;
+		}
+		else if (set === "Silver") {
+			damageOffset = 0;
+			weightOffset = 0.0;
+			goldMult = 2.0;
+		}
+		else if (set === "Spectral") {
+			damageOffset = 3;
+			weightMult = 0.0;
+			goldMult = 0.0;
+		}
+		else if (set === "Steel") {
+			damageOffset = 0;
+			weightOffset = 0.0;
+			goldMult = 1.0;
+		}
+		else if (set === "SkyforgeSteel") {
+			damageOffset = 3;
+			weightOffset = 0.0;
+			goldMult = 7.0;
+		}
+		else if (set === "Wood") {
+			damageOffset = -5;
+			weightOffset = -8.0;
+			goldMult = 0.25;
+		}
+		else {
+			baseSet = "";
 		}
 
-		if (type === "Dagger") {
+
+
+
+		if (type === "Anlace") {
+			baseType = "Dagger";
+			weightOffset /= 2;
+			weightOffset -= 0.5;
+		}
+		else if (type === "Club") {
+			baseType = "Mace";
+			damageOffset -= 1.0;
+			weightOffset -= 1.0;
+			speedOffset += 0.05;
+		}
+		else if (type === "Dagger") {
+			baseType = "Dagger";
 			weightOffset /= 2;
 		}
+		else if (type === "Dadao") {
+			baseType = "Greatsword";
+			damageOffset -= 0.5;
+			weightOffset -= 1.0;
+			speedOffset += 0.025;
+			alreadyReqtified = true;
+		}
+		else if (type === "DaiKatana") {
+			baseType = "Greatsword";
+			weightOffset -= 3.0;
+		}
+		else if (type === "DoubleAxe") {
+			baseType = "Battleaxe";
+			damageOffset += 1.0;
+			weightOffset += 2.0;
+		}
+		else if (type === "Greatsword") {
+			baseType = "Greatsword";
+			speedOffset += 0.05;
+		}
+		else if (type === "Halberd") {
+			baseType = "Battleaxe";
+			speedOffset -= 0.05;
+			reachOffset += 0.2;
+		}
+		else if (type === "Hatchet") {
+			baseType = "WarAxe";
+			damageOffset -= 1;
+			weightOffset -= 1.0;
+			speedOffset += 0.1;
+			reachOffset -= 0.1;
+		}
+		else if (type === "Katana") {
+			baseType = "Sword";
+			weightOffset -= 1.5;
+		}
+		else if (type === "Longsword") {
+			baseType = "Sword";
+			damageOffset += 1;
+			weightOffset += 1.0;
+			speedOffset -= 0.05;
+			reachOffset += 0.1;
+		}
+		else if (type === "Longmace") {
+			baseType = "Warhammer";
+			damageOffset -= 1;
+			weightOffset -= 2.0;
+			speedOffset += 0.05
+		}
+		else if (type === "Maul") {
+			baseType = "Mace";
+			damageOffset += 1;
+			weightOffset += 1.0;
+			speedOffset -= 0.1;
+		}
+		else if (type === "Quarterstaff") {
+			damageOffset -= 4;
+			weightOffset -= 6.0;
+			speedOffset += 0.15;
+		}
+		else if (type === "Saber") {
+			baseType = "Sword";
+			damageOffset -= 1.0;
+			weightOffset -= 1.0;
+			speedOffset += 0.1;
+		}
+		else if (type === "Scimitar") {
+			baseType = "Sword";
+			damageOffset -= 0.5;
+			weightOffset -= 0.5;
+			speedOffset += 0.05;
+			alreadyReqtified = true;
+		}
+		else if (type === "Scythe") {
+			baseType = "Battleaxe";
+			damageOffset += 1;
+		}
+		else if (type === "Shortsword") {
+			baseType = "Sword";
+			damageOffset -= 1;
+			weightOffset -= 1.0;
+			speedOffset += 0.15;
+			reachOffset -= 0.1;
+		}
+		else if (type === "Tanto") {
+			baseType = "Dagger";
+			damageOffset += 1;
+			weightOffset += 2.5;
+			speedOffset -= 0.1;
+			reachOffset += 0.1;
+		}
+		else if (type === "Wakizashi") {
+			baseType = "Sword";
+			damageOffset -= 1;
+			weightOffset -= 2.5;
+			speedOffset += 0.15;
+			reachOffset -= 0.1
+		}
+		else if (type === "WarPick") {
+			baseType = "WarAxe";
+			damageOffset -= 1;
+		}
+		else {
+			baseType = type;
+		}
 
-		baseWeapon = Database.WeaponBySetAndType(baseSet, type);
+		let baseWeapon = Database.WeaponBySetAndType(baseSet, baseType);
 		if (baseWeapon) {
-			baseWeapon= xelib.GetWinningOverride(baseWeapon);
+			// Gold
 			newVal = xelib.GetGoldValue(baseWeapon) * goldMult + goldOffset;
 			newVal = Math.round(newVal / 5) * 5;
 			if (newVal !== xelib.GetGoldValue(weapon)) {
 				xelib.SetGoldValue(weapon, newVal);
 			}
+			// Weight
 			newVal = xelib.GetWeight(baseWeapon) * weightMult + weightOffset;
 			if (Math.abs(newVal - xelib.GetWeight(weapon)) > 0.001) {
 				xelib.SetWeight(weapon, newVal);
 			}
+			// Damage
 			newVal = xelib.GetDamage(baseWeapon) * damageMult + damageOffset;
+			if (alreadyReqtified) {
+				newVal *= 6;
+			}
 			newVal = Math.trunc(newVal);
 			if (newVal !== xelib.GetDamage(weapon))  {
 				xelib.SetDamage(weapon, newVal);
 			}
+			// Speed
+			newVal = TTLib.GetWeaponSpeed(baseWeapon) + speedOffset;
+			if (Math.abs(newVal - TTLib.GetWeaponSpeed(weapon)) > 0.001) {
+				TTLib.SetWeaponSpeed(weapon, newVal);
+			}
+			// Reach
+			newVal = TTLib.GetWeaponReach(baseWeapon) + reachOffset;
+			if (alreadyReqtified) {
+				newVal *= 0.7;
+			}
+			if (Math.abs(newVal - TTLib.GetWeaponReach(weapon)) > 0.001) {
+				TTLib.SetWeaponReach(weapon, newVal);
+			}
+			// REQ_KW_AlreadyReqtified
+			if (alreadyReqtified) {
+				if (!xelib.HasKeyword(weapon, "REQ_KW_AlreadyReqtified")) {
+					xelib.AddKeyword(weapon, "REQ_KW_AlreadyReqtified");
+				}
+			}
 		}
-		else if (set !== "NULL") {
-			logMessage(`${xelib.LongName(weapon)} doesn't have a base weapon. Base set is ${baseWeapon} and type is ${type}`);
+		else if (set !== "NULL" && !prefixes.includes(set)) {
+			logMessage(`${xelib.LongName(weapon)} doesn't have a base weapon`);
 		}
 		addProgress(1);
 	}
