@@ -410,6 +410,13 @@ for (let weapon of selected) {
 			weightOffset /= 2;
 			weightOffset -= 0.5;
 		}
+		else if (type === "Axestaff") {
+			baseType = "Battleaxe";
+		}
+		else if (type === "Claymore") {
+			baseType = "Greatsword";
+			speedOffset += 0.05;
+		}
 		else if (type === "Club") {
 			baseType = "Mace";
 			damageOffset -= 1.0;
@@ -476,6 +483,7 @@ for (let weapon of selected) {
 			speedOffset -= 0.1;
 		}
 		else if (type === "Quarterstaff") {
+			baseType = "Warhammer";
 			damageOffset -= 4;
 			weightOffset -= 6.0;
 			speedOffset += 0.15;
@@ -503,6 +511,9 @@ for (let weapon of selected) {
 			weightOffset -= 1.0;
 			speedOffset += 0.15;
 			reachOffset -= 0.1;
+		}
+		else if (type === "Spear") {
+			baseType = "Greatsword";
 		}
 		else if (type === "Tanto") {
 			baseType = "Dagger";
