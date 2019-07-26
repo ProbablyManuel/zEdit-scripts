@@ -41,7 +41,12 @@ for (let weapon of selected) {
 			}
 		}
 
-		if (set === "Blades") {
+		if (set === "BlackSting") {
+			damageOffset = 5;
+			weightOffset = 5.0;
+			goldMult = 40.0;
+		}
+		else if (set === "Blades") {
 			damageOffset = 3;
 			weightOffset = 0.0;
 			goldMult = 7.0;
@@ -79,7 +84,7 @@ for (let weapon of selected) {
 			weightOffset = 1.0;
 			goldMult = 6.0;
 		}
-		else if (set === "Dragonbone") {
+		else if (set === "Dragonbone" || set === "Dragonsteel") {
 			damageOffset = 6;
 			weightOffset = 6.0;
 			goldMult = 80.0;
@@ -93,6 +98,11 @@ for (let weapon of selected) {
 			damageOffset = 3;
 			weightOffset = 1.0;
 			goldMult = 2 / 3;
+		}
+		else if (set === "Duke") {
+			damageOffset = 1;
+			weightOffset = 0.0;
+			goldMult = 1.2;
 		}
 		else if (set === "Duskward") {
 			damageOffset = 4;
@@ -109,9 +119,14 @@ for (let weapon of selected) {
 			weightOffset = 5.0;
 			goldMult = 40.0;
 		}
-		else if (set === "Elven") {
+		else if (set === "Elven" || set == "Justiciar") {
 			damageOffset = 2;
 			weightOffset = -2.0;
+			goldMult = 4.0;
+		}
+		else if (set == "Nordic" || set === "Falkreath" || set === "Sorrow") {
+			damageOffset = 2;
+			weightOffset = 0.0;
 			goldMult = 4.0;
 		}
 		else if (set === "Falmer") {
@@ -129,7 +144,7 @@ for (let weapon of selected) {
 			weightOffset = -2.0;
 			goldMult = 0.2;
 		}
-		else if (set === "Glass") {
+		else if (set === "Glass" || set === "Seeker") {
 			damageOffset = 4;
 			weightOffset = -3.0;
 			goldMult = 25.0;
@@ -149,6 +164,18 @@ for (let weapon of selected) {
 			weightOffset = -1.0;
 			goldMult = 0.55;
 		}
+		else if (set === "Knight") {
+			damageOffset = 0.5;
+			weightOffset = 0.0;
+			goldMult = 1.0;
+			alreadyReqtified = true;
+		}
+		else if (set === "Noble") {
+			damageOffset = 1.5;
+			weightOffset = 0.0;
+			goldMult = 1.0;
+			alreadyReqtified = true;
+		}
 		else if (set === "NordHero") {
 			damageOffset = 3;
 			weightOffset = -1.0;
@@ -164,17 +191,22 @@ for (let weapon of selected) {
 			weightOffset = 0.0;
 			goldMult = 2.0;
 		}
+		else if (set === "Sithis") {
+			damageOffset = 1;
+			weightOffset = 0.0;
+			goldMult = 1.5;
+		}
 		else if (set === "Spectral") {
 			damageOffset = 3;
 			weightMult = 0.0;
 			goldMult = 0.0;
 		}
-		else if (set === "Steel") {
+		else if (set === "Steel" || set === "Redguard") {
 			damageOffset = 0;
 			weightOffset = 0.0;
 			goldMult = 1.0;
 		}
-		else if (set === "SkyforgeSteel") {
+		else if (set === "SkyforgeSteel" || set === "Wolf") {
 			damageOffset = 3;
 			weightOffset = 0.0;
 			goldMult = 7.0;
