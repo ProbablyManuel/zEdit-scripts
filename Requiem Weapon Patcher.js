@@ -236,13 +236,88 @@ for (let weapon of selected) {
 			}
 		}
 		else {
-			baseSet = set;
 			// Remove special prefixes from set
 			prefixes = ["Ench", "NonPlayable", "Unique"];
 			for (let prefix of prefixes) {
 				if (set.startsWith(prefix)) {
 					baseSet = baseSet.slice(prefix.length);
 				}
+			}
+
+			if (set === "BlackSting") {
+				baseSet = "Ebony";
+			}
+			else if (set === "Blooded") {
+				baseSet = "Steel";
+				damageOffset += 4;
+				weightOffset += 1.0;
+				goldMult *= 7.0;
+				if (editorID.endsWith("The")) {
+					goldMult *= 0.0;
+					goldOffset += 1630;
+				}
+			}
+			else if (set === "BretonKnight") {
+				baseSet = "Steel";
+				damageOffset += 1;
+				goldMult *= 2.0;
+			}
+			else if (set === "Dragonsteel") {
+				baseSet = "Dragonbone";
+			}
+			else if (set === "Duke") {
+				baseSet = "Steel";
+				damageOffset += 1;
+				weightOffset += 0.0;
+				goldMult *= 1.5;
+			}
+			else if (set === "Duskward") {
+				baseSet = "Steel";
+				damageOffset += 4;
+				weightOffset += 2.0;
+				goldMult *= 10.0;
+			}
+			else if (set === "Justiciar") {
+				baseSet = "Elven";
+			}
+			else if (set === "Falkreath") {
+				baseSet = "Nordic";
+			}
+			else if (set === "Housecarl") {
+				baseSet = "Steel";
+				damageOffset += 3;
+				weightOffset += 3.0;
+				goldMult *= 9.0;
+			}
+			else if (set === "Knight") {
+				baseSet = "Steel";
+				damageOffset += 0.5;
+				weightOffset += 0.0;
+				goldMult *= 1.25;
+			}
+			else if (set === "Noble") {
+				baseSet = "Steel";
+				damageOffset += 1.5;
+				weightOffset += 0.0;
+				goldMult *= 1.75;
+			}
+			else if (set === "Seeker") {
+				baseSet = "Glass"
+			}
+			else if (set === "Sithis") {
+				baseSet = "Steel";
+				damageOffset += 1;
+				weightOffset += 0.0;
+				goldMult *= 1.5;
+			}
+			else if (set === "Sorrow") {
+				baseSet = "Nordic";
+			}
+			else if (set === "Wolf") {
+				baseSet = "SkyforgeSteel";
+			}
+			else {
+				baseSet = set;
 			}
 		}
 
@@ -251,16 +326,6 @@ for (let weapon of selected) {
 			damageOffset += 3;
 			weightOffset += 0.0;
 			goldMult *= 7.0;
-		}
-		else if (baseSet === "Blooded") {
-			baseSet = "Steel";
-			damageOffset += 4;
-			weightOffset += 1.0;
-			goldMult *= 7.0;
-			if (editorID.endsWith("The")) {
-				goldMult *= 0.0;
-				goldOffset += 1630;
-			}
 		}
 		else if (baseSet === "Bound") {
 			baseSet = "Steel";
@@ -274,11 +339,6 @@ for (let weapon of selected) {
 			weightMult = 0.0;
 			goldMult *= 0.0;
 		}
-		else if (baseSet === "BretonKnight") {
-			baseSet = "Steel";
-			damageOffset += 1;
-			goldMult *= 2.0;
-		}
 		else if (baseSet === "Daedric") {
 			baseSet = "Steel";
 			damageOffset += 7;
@@ -291,7 +351,7 @@ for (let weapon of selected) {
 			weightOffset += 1.0;
 			goldMult *= 6.0;
 		}
-		else if (baseSet === "Dragonbone" || baseSet === "Dragonsteel") {
+		else if (baseSet === "Dragonbone") {
 			baseSet = "Steel";
 			damageOffset += 6;
 			weightOffset += 6.0;
@@ -309,37 +369,25 @@ for (let weapon of selected) {
 			weightOffset += 1.0;
 			goldMult *= 2 / 3;
 		}
-		else if (baseSet === "Duke") {
-			baseSet = "Steel";
-			damageOffset += 1;
-			weightOffset += 0.0;
-			goldMult *= 1.5;
-		}
-		else if (baseSet === "Duskward") {
-			baseSet = "Steel";
-			damageOffset += 4;
-			weightOffset += 2.0;
-			goldMult *= 10.0;
-		}
 		else if (baseSet === "Dwarven") {
 			baseSet = "Steel";
 			damageOffset += 1;
 			weightOffset += 1.0;
 			goldMult *= 3.0;
 		}
-		else if (baseSet === "Ebony" || baseSet === "BlackSting") {
+		else if (baseSet === "Ebony") {
 			baseSet = "Steel";
 			damageOffset += 5;
 			weightOffset += 5.0;
 			goldMult *= 40.0;
 		}
-		else if (baseSet === "Elven" || set == "Justiciar") {
+		else if (baseSet === "Elven") {
 			baseSet = "Steel";
 			damageOffset += 2;
 			weightOffset += -2.0;
 			goldMult *= 4.0;
 		}
-		else if (baseSet === "Nordic" || baseSet === "Falkreath" || baseSet === "Sorrow") {
+		else if (baseSet === "Nordic") {
 			baseSet = "Steel";
 			damageOffset += 2;
 			weightOffset += 0.0;
@@ -363,17 +411,11 @@ for (let weapon of selected) {
 			weightOffset += -2.0;
 			goldMult *= 0.2;
 		}
-		else if (baseSet === "Glass" || baseSet === "Seeker") {
+		else if (baseSet === "Glass") {
 			baseSet = "Steel";
 			damageOffset += 4;
 			weightOffset += -3.0;
 			goldMult *= 25.0;
-		}
-		else if (baseSet === "Housecarl") {
-			baseSet = "Steel";
-			damageOffset += 3;
-			weightOffset += 3.0;
-			goldMult *= 9.0;
 		}
 		else if (baseSet === "Imperial") {
 			baseSet = "Steel";
@@ -386,18 +428,6 @@ for (let weapon of selected) {
 			damageOffset += -1;
 			weightOffset += -1.0;
 			goldMult *= 0.55;
-		}
-		else if (baseSet === "Knight") {
-			baseSet = "Steel";
-			damageOffset += 0.5;
-			weightOffset += 0.0;
-			goldMult *= 1.25;
-		}
-		else if (baseSet === "Noble") {
-			baseSet = "Steel";
-			damageOffset += 1.5;
-			weightOffset += 0.0;
-			goldMult *= 1.75;
 		}
 		else if (baseSet === "NordHero") {
 			baseSet = "Steel";
@@ -423,12 +453,6 @@ for (let weapon of selected) {
 			weightOffset += 0.0;
 			goldMult *= 2.0;
 		}
-		else if (baseSet === "Sithis") {
-			baseSet = "Steel";
-			damageOffset += 1;
-			weightOffset += 0.0;
-			goldMult *= 1.5;
-		}
 		else if (baseSet === "Spectral") {
 			baseSet = "Steel";
 			damageOffset += 3;
@@ -447,7 +471,7 @@ for (let weapon of selected) {
 			weightOffset += 0.0;
 			goldMult *= 1.0;
 		}
-		else if (baseSet === "SkyforgeSteel" || baseSet === "Wolf") {
+		else if (baseSet === "SkyforgeSteel") {
 			baseSet = "Steel";
 			damageOffset += 3;
 			weightOffset += 0.0;
