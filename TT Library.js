@@ -23,15 +23,6 @@ module.exports = {
 		return bodyPart;
 	},
 
-	GetWeaponTypeFromEditorID: function(str) {
-		str = str.slice(str.indexOf('_') + 1);
-		armorPart = GetTextBetween(str, '_');
-		if (armorPart === "") {
-			return str.slice(str.indexOf('_') + 1);
-		}
-		return armorPart;
-	},
-
 	GetArmorPart: function(armor) {
 		if (xelib.HasKeyword(armor, "ArmorBoots")) {
 			return "Boots";
