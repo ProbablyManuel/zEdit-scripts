@@ -15,12 +15,12 @@ showProgress({
 });
 
 for (let weapon of selected) {
-	IsBow = xelib.GetValue(weapon, "DNAM\\Animation Type") === "Bow";
-	IsCrossbow = xelib.GetValue(weapon, "DNAM\\Animation Type") === "Crossbow";
-	IsStaff = xelib.GetValue(weapon, "DNAM\\Animation Type") === "Staff";
-	if (!IsBow && !IsCrossbow && !IsStaff) {
+	isBow = xelib.GetValue(weapon, "DNAM\\Animation Type") === "Bow";
+	isCrossbow = xelib.GetValue(weapon, "DNAM\\Animation Type") === "Crossbow";
+	isStaff = xelib.GetValue(weapon, "DNAM\\Animation Type") === "Staff";
+	if (!isBow && !isCrossbow && !isStaff) {
 		let editorID = xelib.EditorID(weapon)
-		let regex = /[^_]+(?:_(?:Ench|NonPlayable|Variant))?_([^_]+)_([^_]+)(?:_(.+))?/
+		let regex = /[^_]+(?:_(?:Creature|Ench|NonPlayable|Variant))?_([^_]+)_([^_]+)(?:_(.+))?/
 		let match = editorID.match(regex);
 		if (match) {
 			let set = match[1];
@@ -422,7 +422,7 @@ for (let weapon of selected) {
 				weightOffset += 0.0;
 				goldMult *= 2.0;
 			}
-			else if (baseSet === "Spectral") {
+			else if (baseSet === "SpectralDraugr") {
 				baseSet = "Steel";
 				damageOffset += 3;
 				weightMult = 0.0;
