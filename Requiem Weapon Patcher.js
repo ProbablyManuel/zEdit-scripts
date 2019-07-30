@@ -448,8 +448,8 @@ for (let weapon of selected) {
 			}
 			else if (baseSet === "Wood") {
 				baseSet = "Steel";
-				damageOffset += -5;
-				weightOffset += -8.0;
+				damageOffset += -6;
+				weightOffset += -7.0;
 				goldMult *= 0.25;
 			}
 			else {
