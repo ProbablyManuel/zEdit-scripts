@@ -356,12 +356,6 @@ for (let weapon of selected) {
 				weightOffset += -2.0;
 				goldMult *= 4.0;
 			}
-			else if (baseSet === "Nordic") {
-				baseSet = "Steel";
-				damageOffset += 2;
-				weightOffset += 0.0;
-				goldMult *= 4.0;
-			}
 			else if (baseSet === "Falmer") {
 				baseSet = "Steel";
 				damageOffset += -1;
@@ -404,6 +398,12 @@ for (let weapon of selected) {
 				weightOffset += -1.0;
 				goldMult *= 6.0;
 			}
+			else if (baseSet === "Nordic") {
+				baseSet = "Steel";
+				damageOffset += 2;
+				weightOffset += 0.0;
+				goldMult *= 4.0;
+			}
 			else if (baseSet === "Orcish") {
 				baseSet = "Steel";
 				damageOffset += 3;
@@ -422,6 +422,12 @@ for (let weapon of selected) {
 				weightOffset += 0.0;
 				goldMult *= 2.0;
 			}
+			else if (baseSet === "SkyforgeSteel") {
+				baseSet = "Steel";
+				damageOffset += 3;
+				weightOffset += 0.0;
+				goldMult *= 7.0;
+			}
 			else if (baseSet === "SpectralDraugr") {
 				baseSet = "Steel";
 				damageOffset += 3;
@@ -439,12 +445,6 @@ for (let weapon of selected) {
 				damageOffset += 0;
 				weightOffset += 0.0;
 				goldMult *= 1.0;
-			}
-			else if (baseSet === "SkyforgeSteel") {
-				baseSet = "Steel";
-				damageOffset += 3;
-				weightOffset += 0.0;
-				goldMult *= 7.0;
 			}
 			else if (baseSet === "Wood") {
 				baseSet = "Steel";
@@ -494,9 +494,6 @@ for (let weapon of selected) {
 			else if (type === "Glaive") {
 				baseType = "Greatsword";
 			}
-			else if (type === "Greatsword") {
-				baseType = "Greatsword";
-			}
 			else if (type === "GreatCrescent") {
 				baseType = "Greatsword";
 			}
@@ -516,18 +513,18 @@ for (let weapon of selected) {
 				baseType = "Sword";
 				weightOffset -= 1.5;
 			}
+			else if (type === "LongMace") {
+				baseType = "Warhammer";
+				damageOffset -= 1;
+				weightOffset -= 2.0;
+				speedOffset += 0.05
+			}
 			else if (type === "Longsword") {
 				baseType = "Sword";
 				damageOffset += 1;
 				weightOffset += 1.0;
 				speedOffset -= 0.05;
 				reachOffset += 0.1;
-			}
-			else if (type === "LongMace") {
-				baseType = "Warhammer";
-				damageOffset -= 1;
-				weightOffset -= 2.0;
-				speedOffset += 0.05
 			}
 			else if (type === "Maul") {
 				baseType = "Mace";
