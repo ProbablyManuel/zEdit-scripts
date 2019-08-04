@@ -340,9 +340,9 @@ for (let weapon of selected) {
 			}
 			else if (baseSet === "Dwarven") {
 				baseSet = "Steel";
-				damageOffset += 1;
-				weightOffset += 1.0;
-				goldMult *= 3.0;
+				damageOffset += 3;
+				weightOffset += 4.0;
+				goldMult *= 5.0;
 			}
 			else if (baseSet === "Ebony") {
 				baseSet = "Steel";
@@ -352,9 +352,9 @@ for (let weapon of selected) {
 			}
 			else if (baseSet === "Elven") {
 				baseSet = "Steel";
-				damageOffset += 2;
+				damageOffset += 1;
 				weightOffset += -2.0;
-				goldMult *= 4.0;
+				goldMult *= 3.0;
 			}
 			else if (baseSet === "Falmer") {
 				baseSet = "Steel";
@@ -406,9 +406,9 @@ for (let weapon of selected) {
 			}
 			else if (baseSet === "Orcish") {
 				baseSet = "Steel";
-				damageOffset += 3;
+				damageOffset += 2;
 				weightOffset += 2.0;
-				goldMult *= 5.0;
+				goldMult *= 4.0;
 			}
 			else if (baseSet === "Redguard") {
 				baseSet = "Steel";
