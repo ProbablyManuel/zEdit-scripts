@@ -500,7 +500,7 @@ for (let weapon of selected) {
 			else if (type === "Halberd") {
 				baseType = "Battleaxe";
 				speedOffset -= 0.05;
-				reachOffset += 0.2;
+				reachOffset += 0.1;
 			}
 			else if (type === "Hatchet") {
 				baseType = "WarAxe";
