@@ -236,13 +236,10 @@ for (let weapon of selected) {
 			else {
 				if (set === "Blooded") {
 					baseSet = "Steel";
-					damageOffset += 4;
-					weightOffset += 1.0;
-					goldMult *= 7.0;
-					if (suffix === "The") {
-						goldMult *= 0.0;
-						goldOffset += 1630;
-					}
+					damageOffset += 0;
+					weightOffset += 0.0;
+					goldMult *= 10.0;
+					speedOffset += 0.15;
 				}
 				else if (set === "BretonKnight") {
 					baseSet = "Steel";
@@ -258,7 +255,7 @@ for (let weapon of selected) {
 				else if (set === "Duskward") {
 					baseSet = "Steel";
 					damageOffset += 4;
-					weightOffset += 2.0;
+					weightOffset += 0.0;
 					goldMult *= 10.0;
 				}
 				else if (set === "Housecarl") {
