@@ -96,6 +96,48 @@ module.exports = {
 
 	SetWeaponReach: function(record, value) {
 		return xelib.SetFloatValue(record, "DNAM\\Reach", value);
+	},
+
+	GetActorSkill: function(npc, skill) {
+		skill = skill.toLowerCase();
+
+		switch (skill) {
+			case "alchemy": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[10]");
+			case "alteration": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[12]");
+			case "block": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[3]");
+			case "conjuration": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[13]");
+			case "destruction": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[14]");
+			case "enchanting": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[17]");
+			case "light armor": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[6]");
+			case "heavy armor": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[5]");
+			case "illusion": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[15]");
+			case "lockpicking": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[8]");
+			case "archery": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[2]");
+			case "one-handed": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[0]");
+			case "pickpocket": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[7]");
+			case "restoration": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[16]");
+			case "smithing": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[4]");
+			case "sneak": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[9]");
+			case "speech": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[11]");
+			case "two-handed": return xelib.GetIntValue(npc, "DNAM\\Skill Values\\[1]");
+			default: return -1;
+		}
+	},
+
+	GetPerkRequiredSkill: function(perk, skill) {
+		// Assumes the perk has at most one base actor value condition
+		// Should hold for any playable perk because the perk menu makes the same assumption
+		const condition = xelib.GetCondition(perk, "GetBaseActorValue");
+		if (condition === 0) {
+			return 0;
+		}
+		if (xelib.GetValue(condition, "CTDA\\Actor Value") !== skill) {
+			return -1;
+		}
+		if (xelib.GetValue(condition, "CTDA\\Type") !== "11000000") {
+			return -1;
+		}
+		return xelib.GetIntValue(condition, "CTDA\\Comparison Value");
 	}
 };
 

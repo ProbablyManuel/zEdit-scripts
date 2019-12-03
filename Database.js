@@ -3,7 +3,7 @@ module.exports = {
 		set = set.toLowerCase()
 		part = part.toLowerCase()
 	
-		let skyrim = xelib.FileByName("Skyrim.esm");
+		const skyrim = xelib.FileByName("Skyrim.esm");
 
 		switch (set) {
 			case "ebony":
@@ -91,9 +91,9 @@ module.exports = {
 		set = set.toLowerCase()
 		type = type.toLowerCase()
 	
-		let skyrim = xelib.FileByName("Skyrim.esm");
-		let dawnguard = xelib.FileByName("Dawnguard.esm");
-		let dragonborn = xelib.FileByName("Dragonborn.esm");
+		const skyrim = xelib.FileByName("Skyrim.esm");
+		const dawnguard = xelib.FileByName("Dawnguard.esm");
+		const dragonborn = xelib.FileByName("Dragonborn.esm");
 
 		switch (set) {
 			case "daedric":
@@ -266,6 +266,48 @@ module.exports = {
 				}
 			default: return 0;
 		}
+	},
+
+	PerkFormListBySkill: function(skill) {
+		skill = skill.toLowerCase();
+
+		const dragonborn = xelib.FileByName("Dragonborn.esm");
+
+		switch (skill) {
+			case "alchemy": return GetRecord(dragonborn, 0x01FE87);
+			case "alteration": return GetRecord(dragonborn, 0x01FEA8);
+			case "block": return GetRecord(dragonborn, 0x01FEAC);
+			case "conjuration": return GetRecord(dragonborn, 0x01FE95);
+			case "destruction": return GetRecord(dragonborn, 0x01FEA6);
+			case "enchanting": return GetRecord(dragonborn, 0x01FEA9);
+			case "light armor": return GetRecord(dragonborn, 0x01FEB0);
+			case "heavy armor": return GetRecord(dragonborn, 0x01FEAB);
+			case "illusion": return GetRecord(dragonborn, 0x01FE94);
+			case "lockpicking": return GetRecord(dragonborn, 0x01FEB2);
+			case "archery": return GetRecord(dragonborn, 0x01FEAF);
+			case "one-handed": return GetRecord(dragonborn, 0x01FEAE);
+			case "pickpocket": return GetRecord(dragonborn, 0x01FEB3);
+			case "restoration": return GetRecord(dragonborn, 0x01FEA7);
+			case "smithing": return GetRecord(dragonborn, 0x01FEAA);
+			case "sneak": return GetRecord(dragonborn, 0x01FEB1);
+			case "speech": return GetRecord(dragonborn, 0x01FEB4);
+			case "two-handed": return GetRecord(dragonborn, 0x01FEAD);
+			default: return 0;
+		}
+	},
+
+	PerksBySkill: function(skill) {
+		const list = xelib.GetWinningOverride(module.exports.PerkFormListBySkill(skill));
+		if (list === 0) {
+			return 0;
+		}
+		const formids = xelib.GetElement(list, "FormIDs");
+		let arr = [];
+		for (let i = 0; i < xelib.ElementCount(formids); i++) {
+			arr.push(xelib.GetWinningOverride(xelib.GetLinksTo(formids, `[${i}]`)));
+
+		}
+		return arr;
 	}
 };
 
