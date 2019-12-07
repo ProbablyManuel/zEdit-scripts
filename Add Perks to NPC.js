@@ -23,21 +23,56 @@ const skills = [
 	"Enchanting",
 	"Light Armor",
 	"Heavy Armor",
-	"Illusion",
+	// "Illusion",
 	"Lockpicking",
 	"Archery",
 	"One-Handed",
-	"Pickpocket",
+	// "Pickpocket",
 	"Restoration",
 	"Smithing",
-	"Sneak",
+	// "Sneak",
 	"Speech",
 	"Two-Handed"
 ]
 
+const skyrim = xelib.FileByName("Skyrim.esm");
+const requiem = xelib.FileByName("Requiem.esp");
+const skyrimIndex = xelib.Hex(xelib.GetFileLoadOrder(skyrim), 2);
+const requiemIndex = xelib.Hex(xelib.GetFileLoadOrder(requiem), 2);
+
+const perkBlackList = [
+	`${skyrimIndex}0F2CA6`,  // Novice Alteration
+	`${skyrimIndex}0C44B7`,  // Apprentice Alteration
+	`${skyrimIndex}0C44B8`,  // Adept Alteration
+	`${skyrimIndex}0C44B9`,  // Expert Alteration
+	`${skyrimIndex}0C44BA`,  // Master Alteration
+	`${skyrimIndex}0153CD`,  // Empowered Alterations
+	`${skyrimIndex}0F2CA7`,  // Novice Conjuration
+	`${skyrimIndex}0C44BB`,  // Apprentice Conjuration
+	`${skyrimIndex}0C44BC`,  // Adept Conjuration
+	`${skyrimIndex}0C44BD`,  // Expert Conjuration
+	`${skyrimIndex}0C44BE`,  // Master Conjuration
+	`${skyrimIndex}0153CE`,  // Summoner's Insight
+	`${skyrimIndex}0F2CA8`,  // Novice Destruction
+	`${skyrimIndex}0C44BF`,  // Apprentice Destruction
+	`${skyrimIndex}0C44C0`,  // Adept Destruction
+	`${skyrimIndex}0C44C1`,  // Expert Destruction
+	`${skyrimIndex}0C44C2`,  // Master Destruction
+	`${skyrimIndex}0153CF`,  // Empowered Elements
+	`${skyrimIndex}0153D2`,  // Impact
+	`${skyrimIndex}0F2CAA`,  // Novice Restoration
+	`${skyrimIndex}0C44C7`,  // Apprentice Restoration
+	`${skyrimIndex}0C44C8`,  // Adept Restoration
+	`${skyrimIndex}0C44C9`,  // Expert Restoration
+	`${skyrimIndex}0C44CA`,  // Master Restoration
+	`${skyrimIndex}0153D1`,  // Benefactor's Insight
+	`${skyrimIndex}0A3F64`,  // Power of Life
+	`${requiemIndex}17E062`,  // Essence of Life
+	`${requiemIndex}47B5B8`  // Painful Regrets
+]
+
 for (const npc of npcs) {
-	let inheritsPerks = xelib.HasElement(npc, "TPLT - Template") && xelib.GetFlag(npc, "ACBS\\Template Flags", "Use Spell List");
-	if (!inheritsPerks) {
+	if (!TTLib.InheritsSpellList(npc)) {
 		for (const skill of skills) {
 			AddPerks(npc, skill);
 		}
@@ -57,8 +92,10 @@ function AddPerks(npc, skill) {
 			}
 			else if (skillLevel >= requiredSkill) {
 				const perkHexFormID = xelib.GetHexFormID(perk);
-				if (!xelib.HasPerk(npc, perkHexFormID)) {
-					xelib.AddPerk(npc, perkHexFormID,  "1");
+				if (!perkBlackList.includes(perkHexFormID)) {
+					if (!xelib.HasPerk(npc, perkHexFormID)) {
+						xelib.AddPerk(npc, perkHexFormID,  "1");
+					}
 				}
 			}
 		}

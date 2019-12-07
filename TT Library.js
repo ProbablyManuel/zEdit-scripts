@@ -138,6 +138,10 @@ module.exports = {
 			return -1;
 		}
 		return xelib.GetIntValue(condition, "CTDA\\Comparison Value");
+	},
+
+	InheritsSpellList: function(npc) {
+		return xelib.HasElement(npc, "TPLT - Template") && xelib.GetFlag(npc, "ACBS\\Template Flags", "Use Spell List");
 	}
 };
 
