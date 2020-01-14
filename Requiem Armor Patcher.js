@@ -14,259 +14,238 @@ showProgress({
     max: selected.length
 });
 
-const bodyRatio = 0.65;
-const feetRatio = 0.1;
-const handRatio = 0.1;
-const headRatio = 0.15;
+const bodyRatio = 0.5;
+const feetRatio = 0.15;
+const handRatio = 0.15;
+const headRatio = 0.2;
 const shieldRatio = 0.25;
 
-for (let armor of selected) {
-	const isClothing = xelib.GetArmorType(armor) === "Clothing";
-	if (!isClothing) {
-		const editorID = xelib.EditorID(armor);
-		const regex = /[^_]+(?:_(?:Ench|NonPlayable|Variant))?_([^_]+)_([^_]+)(?:_(.+))?/
-		const match = editorID.match(regex);
-		if (match) {
-			const set = match[1];
-			const part = match[2];
-			const suffix = match[3];
-			let armorRating = 0.0;
-			let armorRatingOffset = 0.0;
-			let weight = 0.0;
-			let weightOffset = 0.0;
-			let gold = 0;
-			let goldOffset = 0;
+for (const armor of selected) {
+	const editorID = xelib.EditorID(armor);
+	const regex = /[^_]+(?:_(?:Ench|NonPlayable|Variant))?_([^_]+)_([^_]+)_([^_]+)(?:_(.+))?/
+	const match = editorID.match(regex);
+	if (match) {
+		const type = match[1]
+		const set = match[2];
+		const part = match[3];
+		const suffix = match[4];
+		// Values for the whole set
+		let armorRating = 0.0;
+		let weight = 0.0;
+		let gold = 0;
+		// Offsets for this particular item
+		let armorRatingOffset = 0.0;
+		let weightOffset = 0.0;
+		let goldOffset = 0;
 	
-			let baseSet = "";
-			if (set === "AncientNord") {
-				baseSet = "Iron";
-			}
-			else if (set === "Apotheus") {
-				baseSet = "Leather";
-				armorRating += 100;
-				gold += 500;
-			}
-			else if (set === "BlackMageLight") {
-				baseSet = "Scaled";
-				weight -= 1.0;
-				gold += 100;
-			}
-			else if (set === "BlackMageHeavy") {
-				baseSet = "SteelPlate";
-				gold += 200;
-				weight -= 5.0;
-			}
-			else if (set === "BlackArchMageLight") {
-				baseSet = "Glass";
-				armorRating += 50.0;
-				weightMult -= 3.0;
-				gold += 4000;
-			}
-			else if (set === "BlackArchMageHeavy") {
-				baseSet = "Ebony";
-				armorRating += 50.0;
-				weight -= 10.0;
-				gold += 7500;
-			}
-			else if (set === "BretonKnight") {
-				baseSet = "Elven";
-			}
-			else if (set === "Blooded") {
-				baseSet = "SteelPlate";
-				armorRating += 100.0;
-				gold += 500;
-			}
-			else if (set === "CombinedSteel") {
-				baseSet = "SteelPlate";
-			}
-			else if (set === "Ciri") {
-				baseSet = "Scaled";
-			}
-			else if (set === "DarkBrotherhood") {
-				baseSet = "Leather";
-			}
-			else if (set === "DarkBrotherhoodAncient") {
-				baseSet = "Leather";
-				armorRating += 50.0;
-			}
-			else if (set === "Duskward") {
-				baseSet = "GuardLight";
-				armorRating += 100.0;
-				goldOffset += 500;
-			}
-			else if (set === "ESONord") {
-				baseSet = "Steel";
-			}
-			else if (set === "Forsworn") {
-				baseSet = "Fur";
-			}
-			else if (set === "Hermit") {
-				baseSet = "Leather";
-			}
-			else if (set === "Housecarl") {
-				baseSet = "SteelPlate";
-				gold += 500;
-			}
-			else if (set === "ImperialHeavy") {
-				baseSet = "Steel";
-			}
-			else if (set === "ImperialLight") {
-				baseSet = "Leather";
-				if (suffix === "Studded") {
-					armorRatingOffset += 25.0;
-				}
-			}
-			else if (set === "Intrigue") {
-				baseSet = "Leather";
-			}
-			else if (set === "Linwe") {
-				baseSet = "Leather";
-			}
-			else if (set === "Nightingale") {
-				baseSet = "Leather";
-			}
-			else if (set === "NordBattlemage") {
-				baseSet = "SteelPlate";
-			}
-			else if (set === "NordMage") {
-				baseSet = "Scaled";
-			}
-			else if (set === "RoyalVampire") {
-				baseSet = "Scaled";
-			}
-			else if (set === "Shani") {
-				baseSet = "Leather";
-			}
-			else if (set === "SnowElf") {
-				baseSet = "Glass";
-			}
-			else if (set === "StormcloakOfficier") {
-				baseSet = "Steel";
-			}
-			else if (set === "Thief") {
-				baseSet = "Leather";
-			}
-			else if (set === "ThievesGuild") {
-				baseSet = "Leather";
-			}
-			else if (set === "ThievesGuildMaster") {
-				baseSet = "Leather";
-				armorRating += 50.0;
-			}
-			else if (set === "Triss") {
-				baseSet = "Elven";
-			}
-			else if (set === "Vampire") {
-				baseSet = "Leather";
-			}
-			else if (set === "Wayfarer") {
-				baseSet = "Leather";
-			}
-			else if (set === "Wolf") {
-				baseSet = "SteelPlate";
-				weight -= 5.0;
-			}
-			else if (set === "Yennefer") {
-				baseSet = "ChitinLight";
-			}
-			else {
-				baseSet = set;
-			}
+		let baseSet = "";
+		if (set === "Apotheus") {
+			baseSet = "Leather";
+			armorRating += 100;
+			gold += 500;
+		}
+		else if (set === "BlackMageLight") {
+			baseSet = "Scaled";
+			weight -= 1.0;
+			gold += 100;
+		}
+		else if (set === "BlackMageHeavy") {
+			baseSet = "SteelPlate";
+			gold += 200;
+			weight -= 5.0;
+		}
+		else if (set === "BlackArchMageLight") {
+			baseSet = "Glass";
+			armorRating += 50.0;
+			weightMult -= 3.0;
+			gold += 4000;
+		}
+		else if (set === "BlackArchMageHeavy") {
+			baseSet = "Ebony";
+			armorRating += 50.0;
+			weight -= 10.0;
+			gold += 7500;
+		}
+		else if (set === "BretonKnight") {
+			baseSet = "Elven";
+		}
+		else if (set === "Blooded") {
+			baseSet = "SteelPlate";
+			armorRating += 100.0;
+			gold += 500;
+		}
+		else if (set === "CombinedSteel") {
+			baseSet = "SteelPlate";
+		}
+		else if (set === "Ciri") {
+			baseSet = "Scaled";
+		}
+		else if (set === "Dremora") {
+			baseSet = "Daedric";
+		}
+		else if (set === "Duskward") {
+			baseSet = "Guard";
+			armorRating += 100.0;
+			goldOffset += 500;
+		}
+		else if (set === "ESONord") {
+			baseSet = "Steel";
+		}
+		else if (set === "Hermit") {
+			baseSet = "Leather";
+		}
+		else if (set === "Housecarl") {
+			baseSet = "SteelPlate";
+			gold += 500;
+		}
+		else if (set === "Intrigue") {
+			baseSet = "Leather";
+		}
+		else if (set === "NordBattlemage") {
+			baseSet = "SteelPlate";
+		}
+		else if (set === "NordMage") {
+			baseSet = "Scaled";
+		}
+		else if (set === "Shani") {
+			baseSet = "Leather";
+		}
+		else if (set === "Stormcloak") {
+			baseSet = "Guard";
+		}
+		else if (set === "SummersetShadows") {
+			baseSet = "ThievesGuild";
+		}
+		else if (set === "ThievesGuildKarliah") {
+			baseSet = "ThievesGuild";
+		}
+		else if (set === "Thief") {
+			baseSet = "Leather";
+		}
+		else if (set === "Triss") {
+			baseSet = "Elven";
+		}
+		else if (set === "Wayfarer") {
+			baseSet = "Leather";
+		}
+		else if (set === "WornShrouded") {
+			baseSet = "Shrouded";
+		}
+		else if (set === "Yennefer") {
+			baseSet = "Chitin";
+		}
+		else {
+			baseSet = set;
+		}
 
-			if (baseSet === "Blades") {
+		if (type === "Heavy") {
+			if (baseSet === "Aetherium") {
+				armorRating += 750.0;
+				weight += 75.0;
+				gold += 25000;
+			}
+			else if (baseSet === "AncientNord") {
+				armorRating += 450.0;
+				weight += 45.0;
+				gold += 300;
+			}
+			else if (baseSet === "Blades") {
 				armorRating += 550.0;
 				weight += 55.0;
-				gold += 1000;
+				gold += 2500;
 			}
-			else if (baseSet === "ChitinHeavy") {
+			else if (baseSet === "Chitin") {
 				armorRating += 500.0;
 				weight += 35.0;
 				gold += 1000;
 			}
-			else if (baseSet === "ChitinLight") {
-				armorRating += 300.0;
-				weight += 15.0;
-				gold += 700;
-			}
 			else if (baseSet === "Daedric") {
-				armorRating += 800.0;
-				weight += 80.0;
-				gold += 25000;
+				armorRating += 1000.0;
+				weight += 100.0;
+				gold += 50000;
 			}
-			else if (baseSet === "DawnguardHeavy") {
+			else if (baseSet === "Dawnguard") {
 				armorRating += 600.0;
 				weight += 60.0;
-				gold += 800;
+				gold += 1000;
 			}
-			else if (baseSet === "DawnguardLight") {
-				armorRating += 300.0;
-				weight += 15.0;
-				gold += 400;
-			}
-			else if (baseSet === "DragonPlate") {
+			else if (baseSet === "Dragonplate") {
 				armorRating += 750.0;
 				weight += 65.0;
-				gold += 20000;
-			}
-			else if (baseSet === "Dragonscale") {
-				armorRating += 400.0;
-				weight += 20.0;
 				gold += 20000;
 			}
 			else if (baseSet === "Dwarven") {
 				armorRating += 650.0;
 				weight += 70.0;
-				gold += 1500;
+				gold += 2000;
 			}
 			else if (baseSet === "Ebony") {
 				armorRating += 750.0;
-				weight += 75.0;
+				weight += 80.0;
 				gold += 10000;
 			}
-			else if (baseSet === "Elven") {
-				armorRating += 300.0;
-				weight += 15.0;
-				gold += 650;
-			}
-			else if (baseSet === "Fur") {
-				armorRating += 210.0;
-				weight += 10.0;
+			else if (baseSet === "Falmer") {
+				armorRating += 475.0;
+				weight += 45.0;
 				gold += 100;
 			}
-			else if (baseSet === "Glass") {
-				armorRating += 400.0;
-				weight += 15.0;
-				gold += 6000;
+			else if (baseSet === "FalmerHardened") {
+				armorRating += 600.0;
+				weight += 60.0;
+				gold += 400;
 			}
-			else if (baseSet === "GuardLight") {
-				armorRating += 300.0;
-				weight += 20.0;
-				gold += 200;
+			else if (baseSet === "FalmerHeavy") {
+				armorRating += 600.0;
+				weight += 60.0;
+				gold += 400;
 			}
-			else if (baseSet === "Hide") {
-				armorRating += 190.0;
-				weight += 8.0;
-				gold += 80;
-				if (suffix === "Studded") {
-					armorRatingOffset += 35.0;
-					weightOffset += 3.0;
-					goldOffset += 25;
+			else if (baseSet === "Guard") {
+				armorRating += 500.0;
+				weight += 50.0;
+				gold += 500;
+				if (part === "Body") {
+					goldOffset += 100;
+					if (suffix === "TheReach") {
+						armorRatingOffset += 25.0;
+						weightOffset += 5.0;
+						goldOffset += 50;
+					}
+					else if (suffix === "Hjaalmarch") {
+						armorRatingOffset -= 25.0;
+						weightOffset -= 5.0;
+						goldOffset -= 50;
+					}
+					else if (suffix === "ThePale") {
+						armorRatingOffset -= 25.0;
+						weightOffset -= 5.0;
+						goldOffset -= 50;
+					}
+					else if (suffix === "TheRift") {
+						armorRatingOffset -= 25.0;
+						weightOffset -= 5.0;
+						goldOffset -= 50;
+					}
+					else if (suffix === "Winterhold") {
+						armorRatingOffset -= 25.0;
+						weightOffset -= 5.0;
+						goldOffset -= 50;
+					}
 				}
+			}
+			else if (baseSet === "Imperial") {
+				armorRating += 500.0;
+				weight += 50.0;
+				gold += 500;
 			}
 			else if (baseSet === "Iron") {
 				armorRating += 425.0;
 				weight += 40.0;
 				gold += 250;
-				if (suffix === "Banded") {
+				if (suffix === "Pauldrons") {
 					armorRatingOffset += 25.0;
 					weightOffset += 2.5;
 					goldOffset += 75;
 				}
-			}
-			else if (baseSet === "Leather") {
-				armorRating += 250.0;
-				weight += 12.0;
-				gold += 200;
 			}
 			else if (baseSet === "Nordic") {
 				armorRating += 600.0;
@@ -278,17 +257,12 @@ for (let armor of selected) {
 				weight += 60.0;
 				gold += 1500;
 			}
-			else if (baseSet === "PenitusOculatus") {
-				armorRating += 300.0;
-				weight += 12.0;
-				gold += 800;
-			}
-			else if (baseSet === "Scaled") {
-				armorRating += 300.0;
-				weight += 15.0;
-				gold += 400;
-			}
 			else if (baseSet === "Steel") {
+				armorRating += 500.0;
+				weight += 50.0;
+				gold += 500;
+			}
+			else if (baseSet === "StormcloakOfficer") {
 				armorRating += 500.0;
 				weight += 50.0;
 				gold += 500;
@@ -298,27 +272,172 @@ for (let armor of selected) {
 				weight += 60.0;
 				gold += 1000;
 			}
+			else if (baseSet === "Ulfric") {
+				armorRating += 600.0;
+				weight += 60.0;
+				gold += 5000;
+			}
+			else if (baseSet === "Vigilant") {
+				armorRating += 600.0;
+				weight += 60.0;
+				gold += 1000;
+			}
+			else if (baseSet === "Wolf") {
+				armorRating += 600.0;
+				weight += 55.0;
+				gold += 1000;
+			}
 			else if (baseSet !== "NULL") {
-				logMessage(`${xelib.LongName(armor)} doesn't have a base set`);
+				logMessage(`${xelib.LongName(armor)} doesn't have a known set`);
 			}
+		}
+		else if (type === "Light") {
+			if (baseSet === "AncientShrouded") {
+				armorRating += 300.0;
+				weight += 12.0;
+				gold += 400;
+			}
+			else if (baseSet === "Chitin") {
+				armorRating += 300.0;
+				weight += 15.0;
+				gold += 800;
+			}
+			else if (baseSet === "Dawnguard") {
+				armorRating += 300.0;
+				weight += 15.0;
+				gold += 400;
+			}
+			else if (baseSet === "Dragonscale") {
+				armorRating += 400.0;
+				weight += 20.0;
+				gold += 16000;
+			}
+			else if (baseSet === "Elven") {
+				armorRating += 300.0;
+				weight += 15.0;
+				gold += 800;
+			}
+			else if (baseSet === "Forsworn") {
+				armorRating += 210.0;
+				weight += 10.0;
+				gold += 100;
+			}
+			else if (baseSet === "Fur") {
+				armorRating += 210.0;
+				weight += 10.0;
+				gold += 100;
+			}
+			else if (baseSet === "Glass") {
+				armorRating += 400.0;
+				weight += 15.0;
+				gold += 6000;
+			}
+			else if (baseSet === "Guard") {
+				armorRating += 300.0;
+				weight += 15.0;
+				gold += 400;
+				if (part === "Body") {
+					weightOffset += 5.0;
+					goldOffset += 50;
+				}
+			}
+			else if (baseSet === "Hide") {
+				armorRating += 190.0;
+				weight += 8.0;
+				gold += 80;
+				if (suffix === "Studded") {
+					armorRatingOffset += 35.0;
+					weightOffset += 3.0;
+					goldOffset += 25;
+				}
+			}
+			else if (baseSet === "Imperial") {
+				armorRating += 250.0;
+				weight += 12.0;
+				gold += 200;
+				if (suffix === "Studded") {
+					armorRatingOffset += 25.0;
+				}
+			}
+			else if (baseSet === "Leather") {
+				armorRating += 250.0;
+				weight += 12.0;
+				gold += 200;
+			}
+			else if (baseSet === "Linwe") {
+				armorRating += 250.0;
+				weight += 12.0;
+				gold += 200;
+			}
+			else if (baseSet === "Nightingale") {
+				armorRating += 400.0;
+				weight += 12.0;
+				gold += 10000;
+			}
+			else if (baseSet === "PenitusOculatus") {
+				armorRating += 300.0;
+				weight += 12.0;
+				gold += 600;
+			}
+			else if (baseSet === "Scaled") {
+				armorRating += 300.0;
+				weight += 15.0;
+				gold += 400;
+			}
+			else if (baseSet === "Shrouded") {
+				armorRating += 250.0;
+				weight += 12.0;
+				gold += 200;
+			}
+			else if (baseSet === "SnowElf") {
+				armorRating += 400.0;
+				weight += 15.0;
+				gold += 8000;
+			}
+			else if (baseSet === "ThievesGuild") {
+				armorRating += 250.0;
+				weight += 12.0;
+				gold += 200;
+			}
+			else if (baseSet === "ThievesGuildMaster") {
+				armorRating += 300.0;
+				weight += 12.0;
+				gold += 1000;
+			}
+			else if (baseSet === "Vampire") {
+				armorRating += 250.0;
+				weight += 12.0;
+				gold += 200;
+				if (suffix === "Royal" || suffix === "Valerica") {
+					armorRatingOffset += 50;
+					weightOffset += 3.0;
+					goldOffset += 500;
+				}
+			}
+			else if (baseSet !== "NULL") {
+				logMessage(`${xelib.LongName(armor)} doesn't have a known set`);
+			}
+		}
+		else if (type !== "Clothing") {
+			logMessage(`${xelib.LongName(armor)} doesn't have a valid armor type`);
+		}
 	
-			let newVal = GetGoldForBodyPart(gold, part) + goldOffset;
-			if (newVal !== xelib.GetGoldValue(armor)) {
-				xelib.SetGoldValue(armor, newVal);
-			}
-			newVal = GetWeightForBodyPart(weight, part) + weightOffset;
-			if (Math.abs(newVal - xelib.GetWeight(armor)) > 0.001) {
-				xelib.SetWeight(armor, newVal);
-			}
-			newVal = GetArmorRatingForBodyPart(armorRating, part) + armorRatingOffset;
-			newVal = GetFinalArmorRating(newVal, armor);
-			if (Math.abs(newVal - xelib.GetArmorRating(armor)) > 0.001)  {
-				xelib.SetArmorRating(armor, newVal);
-			}
+		let newVal = GetGoldForBodyPart(gold, part) + goldOffset;
+		if (newVal !== xelib.GetGoldValue(armor)) {
+			xelib.SetGoldValue(armor, newVal);
 		}
-		else {
-			logMessage(`${xelib.LongName(armor)} doesn't have a matching EditorID`);
+		newVal = GetWeightForBodyPart(weight, part) + weightOffset;
+		if (Math.abs(newVal - xelib.GetWeight(armor)) > 0.001) {
+			xelib.SetWeight(armor, newVal);
 		}
+		newVal = GetArmorRatingForBodyPart(armorRating, part) + armorRatingOffset;
+		newVal = GetFinalArmorRating(newVal, armor);
+		if (Math.abs(newVal - xelib.GetArmorRating(armor)) > 0.001)  {
+			xelib.SetArmorRating(armor, newVal);
+		}
+	}
+	else {
+		logMessage(`${xelib.LongName(armor)} doesn't have a matching EditorID`);
 	}
 	addProgress(1);
 }
@@ -335,7 +454,7 @@ function GetArmorRatingForBodyPart(armorRating, part) {
 		return feetArmorRating;
 	}
 	handArmorRating = Math.round(armorRating * handRatio);
-	if (part === "hand") {
+	if (part === "hands") {
 		return handArmorRating;
 	}
 	bodyArmorRating = armorRating - headArmorRating - feetArmorRating - handArmorRating;
@@ -360,7 +479,7 @@ function GetGoldForBodyPart(gold, part) {
 		return feetGold;
 	}
 	handGold = Math.round(gold * handRatio);
-	if (part === "hand") {
+	if (part === "hands") {
 		return handGold;
 	}
 	bodyGold = gold - headGold - feetGold - handGold;
@@ -385,7 +504,7 @@ function GetWeightForBodyPart(weight, part) {
 		return feetWeight;
 	}
 	handWeight = Math.round(weight * handRatio * 2) / 2;
-	if (part === "hand") {
+	if (part === "hands") {
 		return handWeight;
 	}
 	bodyWeight = weight - headWeight - feetWeight - handWeight;
