@@ -142,6 +142,20 @@ module.exports = {
 
 	InheritsSpellList: function(npc) {
 		return xelib.HasElement(npc, "TPLT - Template") && xelib.GetFlag(npc, "ACBS\\Template Flags", "Use Spell List");
+	},
+
+	IsPlayable: function(record) {
+		if (xelib.Signature(record) === "ARMO") {
+			return !xelib.GetRecordFlag(record, "Non-Playable") &&
+			       (!xelib.HasElement(record, "BODT\\General Flags") || !xelib.GetFlag(record, "BODT\\General Flags", "(ARMO)Non-Playable")) &&
+			       (!xelib.HasElement(record, "BOD2\\General Flags") || !xelib.GetFlag(record, "BOD2\\General Flags", "(ARMO)Non-Playable"));
+		}
+		else if (xelib.Signature(record === "WEAP")) {
+			return !xelib.GetRecordFlag(record, "Non-Playable") && !xelib.GetFlag(record, "DNAM\\Flags", "Non-playable");
+		}
+		else {
+			return !xelib.GetRecordFlag(record, "Non-Playable");
+		}
 	}
 };
 
