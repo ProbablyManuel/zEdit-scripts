@@ -16,7 +16,7 @@ module.exports = {
 
 	GetBodyPartFromEditorID: function(str) {
 		str = str.slice(str.indexOf('_') + 1);
-		bodyPart = GetTextBetween(str, '_');
+		const bodyPart = GetTextBetween(str, '_');
 		if (bodyPart === "") {
 			return str.slice(str.indexOf('_') + 1);
 		}

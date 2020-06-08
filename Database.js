@@ -311,8 +311,7 @@ module.exports = {
 	}
 };
 
-
 function GetRecord(file, formID) {
-	loadOrderFormID = (xelib.GetFileLoadOrder(file) << 24) + formID;
+	const loadOrderFormID = (xelib.GetFileLoadOrder(file) << 24) + formID;
 	return xelib.GetRecord(0, loadOrderFormID);
 }
