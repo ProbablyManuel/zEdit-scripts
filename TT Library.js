@@ -44,6 +44,11 @@ module.exports = {
 		}
 	},
 
+	GetRecord: function(file, formID) {
+		const loadOrderFormID = (xelib.GetFileLoadOrder(file) << 24) + formID;
+		return xelib.GetRecord(0, loadOrderFormID);
+	},
+
 	GetWeaponType: function(weapon) {
 		if (xelib.HasKeyword(weapon, "WeapTypeBattleaxe")) {
 			return "Battleaxe";
