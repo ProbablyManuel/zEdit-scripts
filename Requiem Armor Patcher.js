@@ -11,12 +11,6 @@ showProgress({
 	max: selected.length
 });
 
-const bodyRatio = 0.5;
-const feetRatio = 0.15;
-const handRatio = 0.15;
-const headRatio = 0.2;
-const shieldRatio = 0.25;
-
 const armorRegex = /^[^_]+(?:_(?:Ench|NP|Var))?_(Heavy|Light)_([^_]+)_([^_]+)(?:_(.+))?$/
 const artifactRegex = /^[^_]+_Artifact_(.+)$/
 const clothingRegex = /^[^_]+(?:_(?:Ench|NP|Var))?_Cloth_([^_]+)_([^_]+)(?:_(.+))?$/
@@ -122,15 +116,15 @@ function SetArmorValues(armor, values) {
  * @returns {number} armorRating - Armor rating of the part or -1 if the part cannot be determined.
  */
 function GetArmorRatingForBodyPart(setArmorRating, part) {
-	const headArmorRating = Math.round(setArmorRating * headRatio);
+	const headArmorRating = Math.round(setArmorRating * 0.2);
 	if (part === "Head") {
 		return headArmorRating;
 	}
-	const feetArmorRating = Math.round(setArmorRating * feetRatio);
+	const feetArmorRating = Math.round(setArmorRating * 0.15);
 	if (part === "Feet") {
 		return feetArmorRating;
 	}
-	const handArmorRating = Math.round(setArmorRating * handRatio);
+	const handArmorRating = Math.round(setArmorRating * 0.15);
 	if (part === "Hands") {
 		return handArmorRating;
 	}
@@ -139,7 +133,7 @@ function GetArmorRatingForBodyPart(setArmorRating, part) {
 		return bodyArmorRating;
 	}
 	if (part === "Shield") {
-		return Math.round(setArmorRating * shieldRatio);
+		return Math.round(setArmorRating * 0.3);
 	}
 	return -1;
 }
@@ -152,24 +146,20 @@ function GetArmorRatingForBodyPart(setArmorRating, part) {
  * @returns {number} gold - Price of the part or -1 if the part cannot be determined.
  */
 function GetGoldForBodyPart(setGold, part) {
-	const headGold = Math.round(setGold * headRatio);
 	if (part === "Head") {
-		return headGold;
+		return Math.round(setGold * 0.2);
 	}
-	const feetGold = Math.round(setGold * feetRatio);
 	if (part === "Feet") {
-		return feetGold;
+		return Math.round(setGold * 0.15);
 	}
-	const handGold = Math.round(setGold * handRatio);
 	if (part === "Hands") {
-		return handGold;
+		return Math.round(setGold * 0.15);
 	}
-	const bodyGold = setGold - headGold - feetGold - handGold;
 	if (part === "Body") {
-		return bodyGold;
+		return Math.round(setGold * 0.5);
 	}
 	if (part === "Shield") {
-		return Math.round(setGold * shieldRatio);
+		return Math.round(setGold * 0.25);
 	}
 	return -1;
 }
@@ -182,15 +172,15 @@ function GetGoldForBodyPart(setGold, part) {
  * @returns {number} weight - Weight of the part or -1 if the part cannot be determined.
  */
 function GetWeightForBodyPart(setWeight, part) {
-	const headWeight = Math.round(setWeight * headRatio * 2) / 2;
+	const headWeight = Math.round(setWeight * 0.2 * 2) / 2;
 	if (part === "Head") {
 		return headWeight;
 	}
-	const feetWeight = Math.round(setWeight * feetRatio * 2) / 2;
+	const feetWeight = Math.round(setWeight * 0.15 * 2) / 2;
 	if (part === "Feet") {
 		return feetWeight;
 	}
-	const handWeight = Math.round(setWeight * handRatio * 2) / 2;
+	const handWeight = Math.round(setWeight * 0.15 * 2) / 2;
 	if (part === "Hands") {
 		return handWeight;
 	}
@@ -199,7 +189,7 @@ function GetWeightForBodyPart(setWeight, part) {
 		return bodyWeight;
 	}
 	if (part === "Shield") {
-		return Math.round(setWeight * shieldRatio * 2) / 2;
+		return Math.round(setWeight * 0.25 * 2) / 2;
 	}
 	return -1;
 }
@@ -276,20 +266,20 @@ function GetArmorSetValuesBlackMage(type, set, part, suffix) {
 		setValues.gold += 100;
 		return setValues;
 	}
-	else if (set === "BlackMageHeavy") {
+	if (set === "BlackMageHeavy") {
 		const setValues = GetArmorSetValuesBase(type, "SteelPlate", part, suffix);
 		setValues.gold += 200;
 		setValues.weight -= 5;
 		return setValues;
 	}
-	else if (set === "BlackArchMageLight") {
+	if (set === "BlackArchMageLight") {
 		const setValues = GetArmorSetValuesBase(type, "Glass", part, suffix);
 		setValues.armorRating += 50;
 		setValues.weight -= 3;
 		setValues.gold += 4000;
 		return setValues;
 	}
-	else if (set === "BlackArchMageHeavy") {
+	if (set === "BlackArchMageHeavy") {
 		const setValues = GetArmorSetValuesBase(type, "Ebony", part, suffix);
 		setValues.armorRating += 50;
 		setValues.weight -= 10;
@@ -403,11 +393,14 @@ function GetArtifactValues(artifact) {
 	}
 	if (artifact === "AurielsShield") {
 		const armorValues = GetArmorValues("Light", "SnowElf", "Shield");
+		armorValues.armorRating += 50;
 		armorValues.gold = 100000;
 		return armorValues;
 	}
 	if (artifact === "DawnguardRuneShield") {
-		return GetArmorValues("Heavy", "Dawnguard", "Shield");
+		const armorValues = GetArmorValues("Heavy", "Dawnguard", "Shield");
+		armorValues.gold = 5000;
+		return armorValues;
 	}
 	if (artifact === "EbonyMail") {
 		const armorValues = GetArmorValues("Heavy", "Ebony", "Body");
@@ -416,7 +409,8 @@ function GetArtifactValues(artifact) {
 	}
 	if (artifact === "HelmOfYngol") {
 		const armorValues = GetArmorValues("Heavy", "AncientNord", "Head");
-		armorValues.gold = 1000;
+		armorValues.armorRating += 50;
+		armorValues.gold = 5000;
 		return armorValues;
 	}
 	if (artifact === "JaggedCrown") {
@@ -475,7 +469,7 @@ function GetBaseSetValues(type, set) {
 			return {armorRating: 550, weight: 40, gold: 300};
 		}
 		else if (set === "Blades") {
-			return {armorRating: 700, weight: 55, gold: 2500};
+			return {armorRating: 700, weight: 50, gold: 2500};
 		}
 		else if (set === "Chitin") {
 			return {armorRating: 600, weight: 35, gold: 1000};
@@ -484,7 +478,7 @@ function GetBaseSetValues(type, set) {
 			return {armorRating: 1200, weight: 100, gold: 50000};
 		}
 		else if (set === "Dawnguard") {
-			return {armorRating: 720, weight: 60, gold: 1000};
+			return {armorRating: 700, weight: 55, gold: 1000};
 		}
 		else if (set === "Dragonplate") {
 			return {armorRating: 900, weight: 65, gold: 20000};
@@ -653,11 +647,6 @@ function GetBaseOffsetValues(type, set, part, suffix) {
 				if (suffix === "Banded") {
 					return {armorRating: 10, weight: 2, gold: 40};
 				}
-			}
-		}
-		else if (set === "Orcish") {
-			if (part === "Shield") {
-				return {armorRating: 5, weight: 1, gold: 0};
 			}
 		}
 	}
