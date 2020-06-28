@@ -1,4 +1,5 @@
 const selected = zedit.GetSelectedRecords("ARMO");
+// const selected = xelib.GetRecords(xelib.FileByName("RRO-815.esp"), "ARMO", true);
 
 const {showProgress, logMessage, progressTitle, addProgress, progressMessage} = zedit.progressService;
 showProgress({
@@ -88,8 +89,9 @@ function buildArmorOffsetValues() {
 	map.set("Heavy_Iron_Body_Pauldrons", new ArmorValues(30, 2.5, 75));
 	map.set("Heavy_Iron_Shield_Banded", new ArmorValues(10, 2, 40));
 	map.set("Light_Chitin_Shield", new ArmorValues(5, 2, 0));
-	map.set("Light_Guard_Shield", new ArmorValues(-15, -1, -50));
-	map.set("Light_Hide_Body_Studded", new ArmorValues(40, 3, 25));
+	map.set("Light_Fur_Body_Kilt", new ArmorValues(-50, -2, -20));
+	map.set("Light_Fur_Body_KiltWithMantle", new ArmorValues(-50, -2, -20));
+	map.set("Light_Hide_Body_Studded", new ArmorValues(25, 1, 25));
 	map.set("Light_Imperial_Body_Studded", new ArmorValues(25, 1, 25));
 	map.set("Light_Imperial_Body_Tullius", new ArmorValues(50, 0, 3000));
 	map.set("Light_Vampire_Body_Royal", new ArmorValues(60, 3, 500));
@@ -142,28 +144,28 @@ function buildArmorSetValuesBase(map) {
 	map.set("Heavy_Ulfric", new ArmorValues(720, 60, 5000));
 	map.set("Heavy_Vigilant", new ArmorValues(720, 60, 1000));
 	map.set("Heavy_Wolf", new ArmorValues(720, 50, 1000));
-	map.set("Light_Alikr", new ArmorValues(300, 12, 300));
+	map.set("Light_Alikr", new ArmorValues(300, 10, 300));
 	map.set("Light_AncientShrouded", new ArmorValues(360, 12, 400));
 	map.set("Light_Chitin", new ArmorValues(360, 15, 800));
 	map.set("Light_Dawnguard", new ArmorValues(360, 15, 600));
 	map.set("Light_Dragonscale", new ArmorValues(480, 20, 16000));
 	map.set("Light_Elven", new ArmorValues(360, 15, 800));
-	map.set("Light_Forsworn", new ArmorValues(250, 10, 100));
-	map.set("Light_Fur", new ArmorValues(250, 10, 100));
+	map.set("Light_Forsworn", new ArmorValues(250, 8, 100));
+	map.set("Light_Fur", new ArmorValues(250, 8, 100));
 	map.set("Light_Glass", new ArmorValues(480, 15, 6000));
-	map.set("Light_Guard", new ArmorValues(360, 15, 400));
-	map.set("Light_Hide", new ArmorValues(230, 8, 80));
-	map.set("Light_Imperial", new ArmorValues(300, 12, 200));
-	map.set("Light_Leather", new ArmorValues(300, 12, 200));
-	map.set("Light_Linwe", new ArmorValues(300, 12, 200));
+	map.set("Light_Guard", new ArmorValues(300, 15, 400));
+	map.set("Light_Hide", new ArmorValues(250, 8, 100));
+	map.set("Light_Imperial", new ArmorValues(300, 10, 200));
+	map.set("Light_Leather", new ArmorValues(300, 10, 200));
+	map.set("Light_Linwe", new ArmorValues(300, 10, 200));
 	map.set("Light_Nightingale", new ArmorValues(360, 12, 10000));
 	map.set("Light_PenitusOculatus", new ArmorValues(360, 12, 600));
 	map.set("Light_Scaled", new ArmorValues(360, 15, 400));
-	map.set("Light_Shrouded", new ArmorValues(300, 12, 200));
+	map.set("Light_Shrouded", new ArmorValues(300, 10, 200));
 	map.set("Light_SnowElf", new ArmorValues(480, 15, 8000));
-	map.set("Light_ThievesGuild", new ArmorValues(300, 12, 200));
+	map.set("Light_ThievesGuild", new ArmorValues(300, 10, 200));
 	map.set("Light_ThievesGuildMaster", new ArmorValues(360, 12, 1000));
-	map.set("Light_Vampire", new ArmorValues(300, 12, 200));
+	map.set("Light_Vampire", new ArmorValues(300, 10, 200));
 }
 
 
