@@ -108,10 +108,14 @@ function buildArmorSetValues() {
 	const map = new Map();
 	buildArmorSetValuesBase(map);
 	buildArmorSetValuesBlackMage(map);
-	buildArmorSetValuesCombinedSteel(map);
+	buildArmorSetValuesCommonClothesAndArmors(map);
+	buildArmorSetValuesDivineWrath(map);
+	buildArmorSetValuesHoth(map);
+	buildArmorSetValuesRunicArmor(map);
 	buildArmorSetValuesTheWitcher(map);
 	buildArmorSetValuesUlagsLegacy(map);
 	buildArmorSetValuesVariants(map);
+	buildArmorSetValuesWarmongerArmory(map);
 	return map;
 }
 
@@ -170,43 +174,49 @@ function buildArmorSetValuesBase(map) {
 
 
 function buildArmorSetValuesBlackMage(map) {
-	//
-	const scale = map.get("Light_Scaled");
-	const blackMageLight = new ArmorValues(
-		scale.armorRating,
-		scale.weight - 1,
-		scale.price
-	);
-	map.set("Light_BlackMage", blackMageLight);
-	//
-	const steelPlate = map.get("Heavy_SteelPlate");
-	const blackMageHeavy = new ArmorValues(
-		steelPlate.armorRating,
-		steelPlate.weight - 5,
-		steelPlate.price
-	);
-	map.set("Heavy_BlackMage", blackMageHeavy);
-	//
 	const glass = map.get("Light_Glass");
-	const blackArchMageLight = new ArmorValues(
-		glass.armorRating + 50,
-		glass.weight - 3,
-		glass.price * 1.5
+	const lightBlackArchMage = new ArmorValues(
+		glass.armorRating,
+		glass.weight * 0.8,
+		50000
 	);
-	map.set("Light_BlackArchMage", blackArchMageLight);
-	//
 	const ebony = map.get("Heavy_Ebony");
-	const blackArchMageHeavy = new ArmorValues(
-		ebony.armorRating + 50,
-		ebony.weight - 10,
-		ebony.price * 1.5
+	const heavyBlackArchMage = new ArmorValues(
+		ebony.armorRating,
+		ebony.weight * 0.8,
+		50000
 	);
-	map.set("Heavy_BlackArchMage", blackArchMageHeavy);
+	map.set("Heavy_BlackArchMage", heavyBlackArchMage);
+	map.set("Heavy_BlackMage", map.get("Heavy_SteelPlate"));
+	map.set("Light_BlackArchMage", lightBlackArchMage);
+	map.set("Light_BlackMage", map.get("Light_Scaled"));
 }
 
 
-function buildArmorSetValuesCombinedSteel(map) {
-	map.set("Heavy_CombinedSteel", map.get("Heavy_SteelPlate"));
+function buildArmorSetValuesCommonClothesAndArmors(map) {
+	map.set("Light_Mail", new ArmorValues(360, 20, 300));
+}
+
+
+function buildArmorSetValuesDivineWrath(map) {
+	map.set("Heavy_DivineWrath", new ArmorValues(800, 60, 8000));
+}
+
+
+function buildArmorSetValuesHoth(map) {
+	map.set("Heavy_Hoth", map.get("Heavy_Iron"));
+}
+
+
+function buildArmorSetValuesRunicArmor(map) {
+	const steel = map.get("Heavy_Steel");
+	const steelPlate = map.get("Heavy_SteelPlate");
+	const runicArmor = new ArmorValues(
+		steelPlate.armorRating,
+		steel.weight,
+		steelPlate.gold
+	);
+	map.set("Heavy_Runic", runicArmor);
 }
 
 
@@ -219,9 +229,26 @@ function buildArmorSetValuesTheWitcher(map) {
 
 
 function buildArmorSetValuesUlagsLegacy(map) {
-	map.set("Light_Apotheus", new ArmorValues(360, 12, 1000));
-	map.set("Light_Duskward", new ArmorValues(480, 15, 2000));
-	map.set("Heavy_Blooded", new ArmorValues(800, 60, 2500));
+	map.set("Heavy_Blooded", new ArmorValues(800, 60, 3000));
+	map.set("Light_Apotheus", new ArmorValues(360, 10, 1000));
+	map.set("Light_Duskward", new ArmorValues(480, 20, 2000));
+}
+
+
+function buildArmorSetValuesWarmongerArmory(map) {
+	map.set("Heavy_NordHero", map.get("Heavy_Nordic"));
+	map.set("Heavy_Pathfinder", map.get("Heavy_Steel"));
+	map.set("Heavy_SoulRipper", map.get("Heavy_Ebony"));
+	map.set("Heavy_WanderingKnight", map.get("Heavy_Vigilant"));
+	map.set("Light_AlikrElite", map.get("Light_PenitusOculatus"));
+	map.set("Light_NetchLeather", map.get("Light_Leather"));
+	map.set("Light_RogueThief", map.get("Light_Linwe"));
+	map.set("Light_ShadowWarlock", map.get("Light_Nightingale"));
+	// unique variants based on unused Warmonger Armory sets
+	map.set("Heavy_BlackthornFamily", map.get("Heavy_Pathfinder"));
+	map.set("Heavy_Galmar", map.get("Heavy_NordHero"));
+	map.set("Heavy_Irileth", map.get("Heavy_SoulRipper"));
+	map.set("Light_Alain", map.get("Light_ShadowWarlock"));
 }
 
 
@@ -449,13 +476,22 @@ function GetWeightForBodyPart(setWeight, part) {
  * @param {ArmorValues} values - The armor values of the item.
  */
 function setArmorValues(armor, values) {
-	if (values.gold !== xelib.GetGoldValue(armor)) {
+	if (values.gold < 0) {
+		logMessage(`${xelib.Name(armor)} has negative price`)
+	}
+	else if (values.gold !== xelib.GetGoldValue(armor)) {
 		xelib.SetGoldValue(armor, values.gold);
 	}
-	if (Math.abs(values.weight - xelib.GetWeight(armor)) > 0.001) {
+	if (values.weight < 0) {
+		logMessage(`${xelib.Name(armor)} has negative weight`)
+	}
+	else if (Math.abs(values.weight - xelib.GetWeight(armor)) > 0.001) {
 		xelib.SetWeight(armor, values.weight);
 	}
-	if (Math.abs(values.armorRating - xelib.GetArmorRating(armor)) > 0.001) {
+	if (values.armorRating < 0) {
+		logMessage(`${xelib.Name(armor)} has negative armor rating`)
+	}
+	else if (Math.abs(values.armorRating - xelib.GetArmorRating(armor)) > 0.001) {
 		xelib.SetArmorRating(armor, values.armorRating);
 	}
 }
