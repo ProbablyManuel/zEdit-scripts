@@ -103,6 +103,14 @@ module.exports = {
 		return xelib.SetFloatValue(record, "DNAM\\Reach", value);
 	},
 
+	GetWeaponStagger: function(record) {
+		return xelib.GetFloatValue(record, "DNAM\\Stagger");
+	},
+
+	SetWeaponStagger: function(record, value) {
+		return xelib.SetFloatValue(record, "DNAM\\Stagger", value);
+	},
+
 	GetActorSkill: function(npc, skill) {
 		skill = skill.toLowerCase();
 
