@@ -94,6 +94,7 @@ function buildArmorOffsetValues() {
 	map.set("Light_Hide_Body_Studded", new ArmorValues(25, 1, 25));
 	map.set("Light_Imperial_Body_Studded", new ArmorValues(25, 1, 25));
 	map.set("Light_Imperial_Body_Tullius", new ArmorValues(50, 0, 3000));
+	map.set("Light_Vampire_Body_Harkon", new ArmorValues(60, 3, 500));
 	map.set("Light_Vampire_Body_Royal", new ArmorValues(60, 3, 500));
 	map.set("Light_Vampire_Body_Valerica", new ArmorValues(60, 3, 500));
 	return map;
@@ -109,6 +110,7 @@ function buildArmorSetValues() {
 	buildArmorSetValuesBase(map);
 	buildArmorSetValuesBlackMage(map);
 	buildArmorSetValuesCommonClothesAndArmors(map);
+	buildArmorSetValuesCivilWarArmors(map);
 	buildArmorSetValuesDivineWrath(map);
 	buildArmorSetValuesHoth(map);
 	buildArmorSetValuesRunicArmor(map);
@@ -126,6 +128,7 @@ function buildArmorSetValues() {
  */
 function buildArmorSetValuesBase(map) {
 	map.set("Heavy_Aetherium", new ArmorValues(900, 75, 50000));
+	map.set("Heavy_Ahzidal", new ArmorValues(550, 40, 5000));
 	map.set("Heavy_AncientNord", new ArmorValues(550, 40, 300));
 	map.set("Heavy_Blades", new ArmorValues(700, 50, 2500));
 	map.set("Heavy_Chitin", new ArmorValues(600, 35, 1000));
@@ -147,7 +150,7 @@ function buildArmorSetValuesBase(map) {
 	map.set("Heavy_SteelPlate", new ArmorValues(720, 60, 1000));
 	map.set("Heavy_Ulfric", new ArmorValues(720, 60, 5000));
 	map.set("Heavy_Vigilant", new ArmorValues(720, 60, 1000));
-	map.set("Heavy_Wolf", new ArmorValues(720, 50, 1000));
+	map.set("Heavy_Wolf", new ArmorValues(720, 50, 5000));
 	map.set("Light_Alikr", new ArmorValues(300, 10, 300));
 	map.set("Light_AncientShrouded", new ArmorValues(360, 12, 400));
 	map.set("Light_Chitin", new ArmorValues(360, 15, 800));
@@ -162,11 +165,12 @@ function buildArmorSetValuesBase(map) {
 	map.set("Light_Imperial", new ArmorValues(300, 10, 200));
 	map.set("Light_Leather", new ArmorValues(300, 10, 200));
 	map.set("Light_Linwe", new ArmorValues(300, 10, 200));
-	map.set("Light_Nightingale", new ArmorValues(360, 12, 10000));
+	map.set("Light_Nightingale", new ArmorValues(360, 12, 50000));
 	map.set("Light_PenitusOculatus", new ArmorValues(360, 12, 600));
 	map.set("Light_Scaled", new ArmorValues(360, 15, 400));
 	map.set("Light_Shrouded", new ArmorValues(300, 10, 200));
 	map.set("Light_SnowElf", new ArmorValues(480, 15, 8000));
+	map.set("Light_Stalhrim", new ArmorValues(480, 15, 6000));
 	map.set("Light_ThievesGuild", new ArmorValues(300, 10, 200));
 	map.set("Light_ThievesGuildMaster", new ArmorValues(360, 12, 1000));
 	map.set("Light_Vampire", new ArmorValues(300, 10, 200));
@@ -195,6 +199,13 @@ function buildArmorSetValuesBlackMage(map) {
 
 function buildArmorSetValuesCommonClothesAndArmors(map) {
 	map.set("Light_Mail", new ArmorValues(360, 20, 300));
+}
+
+
+function buildArmorSetValuesCivilWarArmors(map) {
+	map.set("Heavy_Stormblade", new ArmorValues(720, 60, 5000));
+	map.set("Heavy_ImperialLegate", new ArmorValues(720, 60, 5000));
+	map.set("Light_Ulfric", new ArmorValues(360, 15, 5000));
 }
 
 
