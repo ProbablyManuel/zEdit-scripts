@@ -108,16 +108,8 @@ function buildArmorOffsetValues() {
 function buildArmorSetValues() {
 	const map = new Map();
 	buildArmorSetValuesBase(map);
-	buildArmorSetValuesBlackMage(map);
-	buildArmorSetValuesCommonClothesAndArmors(map);
-	buildArmorSetValuesCivilWarArmors(map);
-	buildArmorSetValuesDivineWrath(map);
-	buildArmorSetValuesHoth(map);
-	buildArmorSetValuesRunicArmor(map);
-	buildArmorSetValuesTheWitcher(map);
-	buildArmorSetValuesUlagsLegacy(map);
-	buildArmorSetValuesVariants(map);
-	buildArmorSetValuesWarmongerArmory(map);
+	buildArmorSetValuesBaseVariants(map);
+	buildArmorSetValuesMods(map);
 	return map;
 }
 
@@ -176,8 +168,11 @@ function buildArmorSetValuesBase(map) {
 	map.set("Light_Vampire", new ArmorValues(300, 10, 200));
 }
 
+function buildArmorSetValuesMods(map) {
+	// ESO Altmer
+	map.set("Light_Altmer", map.get("Light_Glass"));
 
-function buildArmorSetValuesBlackMage(map) {
+	// Black Mage
 	const glass = map.get("Light_Glass");
 	const lightBlackArchMage = new ArmorValues(
 		glass.armorRating,
@@ -194,32 +189,44 @@ function buildArmorSetValuesBlackMage(map) {
 	map.set("Heavy_BlackMage", map.get("Heavy_SteelPlate"));
 	map.set("Light_BlackArchMage", lightBlackArchMage);
 	map.set("Light_BlackMage", map.get("Light_Scaled"));
-}
 
+	// Blood Witch
+	map.set("Light_BloodWitch", map.get("Light_Glass"));
 
-function buildArmorSetValuesCommonClothesAndArmors(map) {
+	// Chainmail
 	map.set("Light_Mail", new ArmorValues(360, 20, 300));
-}
 
-
-function buildArmorSetValuesCivilWarArmors(map) {
+	// Civil War (Artifacts Rebalance)
 	map.set("Heavy_Stormblade", new ArmorValues(720, 60, 5000));
 	map.set("Heavy_ImperialLegate", new ArmorValues(720, 60, 5000));
 	map.set("Light_Ulfric", new ArmorValues(360, 15, 5000));
-}
 
-
-function buildArmorSetValuesDivineWrath(map) {
+	// Divine Wrath
 	map.set("Heavy_DivineWrath", new ArmorValues(800, 60, 8000));
-}
 
-
-function buildArmorSetValuesHoth(map) {
+	// Hoth
 	map.set("Heavy_Hoth", map.get("Heavy_Iron"));
-}
 
+	// Imperial Assassin
+	map.set("Light_ImperialAssassin", map.get("Light_Leather"));
 
-function buildArmorSetValuesRunicArmor(map) {
+	// Nord Battlemage
+	map.set("Heavy_NordBattlemage", map.get("Heavy_SteelPlate"));
+	map.set("Light_NordMage", map.get("Light_Scaled"));
+
+	// Nord Scale
+	map.set("Light_Scale", map.get("Light_Scaled"));
+	map.set("Light_NordicScale", map.get("Light_Scaled"));
+
+	// Practical Pirate
+	map.set("Light_Pirate", map.get("Light_Leather"));
+	map.set("Light_DarkPirate", map.get("Light_Pirate"));
+
+	// Rough Leather
+	map.set("Light_RoughLeather", map.get("Light_Guard"));
+	map.set("Light_Blackguard", map.get("Light_RoughLeather"));
+
+	// Runic (Witchplate)
 	const steel = map.get("Heavy_Steel");
 	const steelPlate = map.get("Heavy_SteelPlate");
 	const runicArmor = new ArmorValues(
@@ -228,25 +235,17 @@ function buildArmorSetValuesRunicArmor(map) {
 		steelPlate.gold
 	);
 	map.set("Heavy_Runic", runicArmor);
-}
 
+	// Talos Housecarl
+	map.set("Heavy_ImperialLoyalist", map.get("Heavy_SteelPlate"));
+	map.set("Light_ImperialLoyalist", map.get("Light_PenitusOculatus"));
 
-function buildArmorSetValuesTheWitcher(map) {
-	map.set("Light_Ciri", map.get("Light_Scaled"));
-	map.set("Light_Shani", map.get("Light_Leather"));
-	map.set("Light_Triss", map.get("Light_Elven"));
-	map.set("Light_Yennefer", map.get("Light_Chitin"));
-}
-
-
-function buildArmorSetValuesUlagsLegacy(map) {
+	// Ulag's Legacy
 	map.set("Heavy_Blooded", new ArmorValues(800, 60, 3000));
 	map.set("Light_Apotheus", new ArmorValues(360, 10, 1000));
 	map.set("Light_Duskward", new ArmorValues(480, 20, 2000));
-}
 
-
-function buildArmorSetValuesWarmongerArmory(map) {
+	// Warmonger Armory
 	map.set("Heavy_NordHero", map.get("Heavy_Nordic"));
 	map.set("Heavy_Pathfinder", map.get("Heavy_Steel"));
 	map.set("Heavy_SoulRipper", map.get("Heavy_Ebony"));
@@ -260,6 +259,15 @@ function buildArmorSetValuesWarmongerArmory(map) {
 	map.set("Heavy_Galmar", map.get("Heavy_NordHero"));
 	map.set("Heavy_Irileth", map.get("Heavy_SoulRipper"));
 	map.set("Light_Alain", map.get("Light_ShadowWarlock"));
+
+	// Wayfarer
+	map.set("Light_Wayfarer", map.get("Light_Leather"));
+
+	// Witcher 3
+	map.set("Light_Ciri", map.get("Light_Scaled"));
+	map.set("Light_Shani", map.get("Light_Leather"));
+	map.set("Light_Triss", map.get("Light_Elven"));
+	map.set("Light_Yennefer", map.get("Light_Chitin"));
 }
 
 
@@ -267,13 +275,14 @@ function buildArmorSetValuesWarmongerArmory(map) {
  * Builds armor values for all variants of sets in base Requiem (e.g. Worn Shrouded Armor).
  * @param {Map<String, ArmorValues>} map - The keys are type + set separated by '_'.
  */
-function buildArmorSetValuesVariants(map) {
+function buildArmorSetValuesBaseVariants(map) {
 	map.set("Heavy_Dremora", map.get("Heavy_Daedric"));
 	map.set("Heavy_Shellbug", map.get("Heavy_FalmerHeavy"));
 	map.set("Light_Stormcloak", map.get("Light_Guard"));
 	map.set("Light_SummersetShadows", map.get("Light_ThievesGuild"));
 	map.set("Light_ThievesGuildKarliah", map.get("Light_ThievesGuild"));
 	map.set("Light_WornShrouded", map.get("Light_Shrouded"));
+	map.set("Light_Blackguard", map.get("Light_ThievesGuild"));
 }
 
 
