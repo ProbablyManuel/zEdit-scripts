@@ -32,21 +32,22 @@ for (const weapon of selected) {
 			let weightOffset = 0;
 			let weightMult = 1;
 			let damageOffset = 0;
-			let damageMult = 1;
 			let speedOffset = 0;
 			let reachOffset = 0;
 			let staggerOffset = 0;
 			let baseSet = "";
 			if (set === "Artifact" || set === "Replica") {
-				if (suffix === "RuefulAxe") {
-					baseSet == "Silver";
-					goldOffset = 50000;
-					goldMult = 0;
+				if (suffix === "Aegisbane") {
+					baseSet = "Iron";
 				}
-				else if (suffix === "Wuuthrad") {
-					baseSet = "Ebony";
-					goldOffset = 50000;
+				else if (suffix === "Amren") {
+					baseSet = "Redguard";
+				}
+				else if (suffix === "AncientDawnguard") {
+					baseSet = "Dawnguard";
+					goldOffset = 5000;
 					goldMult = 0;
+					damageOffset += 2;
 				}
 				else if (suffix === "BladeOfSacrifice") {
 					baseSet = "Ebony";
@@ -57,93 +58,175 @@ for (const weapon of selected) {
 				else if (suffix === "BladeOfWoeAwakened") {
 					baseSet = "Ebony";
 				}
-				// else if (suffix === "KahvozeinsFang") {
-				// 	baseSet =
-				// }
-				else if (suffix === "Keening") {
+				else if (suffix === "Bloodscythe") {
 					baseSet = "Ebony";
-					goldOffset = 50000;
+					goldOffset = 15000;
 					goldMult = 0;
-					damageOffset += 2;
+					weightOffset -= 1;
 				}
-				else if (suffix === "MehrunesRazor") {
-					baseSet = "Ebony";
-					goldOffset = 50000;
-					goldMult = 0;
-				}
-				else if (suffix === "Nettlebane") {
-					baseSet = "Ebony";
-					goldOffset += 1000;
-				}
-				else if (suffix === "EbonyBlade") {
-					baseSet = "Daedric";
-					goldOffset = 50000;
+				else if (suffix === "BloodskalBlade") {
+					baseSet = "Silver";
+					goldOffset = 5000;
 					goldMult = 0;
 				}
-				else if (suffix === "MolagBal") {
-					baseSet = "Daedric";
-					goldOffset = 50000;
-					goldMult = 0;
+				else if (suffix === "BolarsOathblade") {
+					baseSet = "Blades";
 				}
 				else if (suffix === "Chillrend") {
 					baseSet = "Glass";
 				}
 				else if (suffix === "Dawnbreaker") {
 					baseSet = "Silver";
-					goldOffset = 50000;
+					goldOffset = 100000;
 					goldMult = 0;
+					damageOffset += 1;
 				}
 				else if (suffix === "Dragonbane") {
 					baseSet = "Blades";
 					goldOffset += 5000;
+					goldMult = 0;
+				}
+				else if (suffix === "EbonyBlade") {
+					baseSet = "Ebony";
+					goldOffset = 100000;
+					goldMult = 0;
+				}
+				else if (suffix === "Eduj") {
+					baseSet = "NordHero";
+				}
+				else if (suffix === "GauldurBlackblade") {
+					baseSet = "NordHero";
 				}
 				else if (suffix === "Ghostblade") {
-					baseSet = "DraugrHoned";
-					weightMult = 0;
+					baseSet = "SpectralDraugr";
+					goldOffset = 2000;
 				}
 				else if (suffix === "Gorak") {
 					baseSet = "Forsworn";
 				}
+				else if (suffix === "Grimsever") {
+					baseSet = "Glass";
+				}
 				else if (suffix === "Harkon") {
-					baseSet = "Ebony";
-					goldOffset = 50000;
+					baseSet = "Daedric";
+					goldOffset = 15000;
+					goldMult = 0;
+					damageOffset += 1;
+				}
+				else if (suffix === "Horksbane") {
+					baseSet = "Steel";
+				}
+				else if (suffix === "KahvozeinsFang") {
+					baseSet = "Dragonbone";
+					goldOffset = 2000;
 					goldMult = 0;
 				}
-				else if (suffix === "Nightingale") {
+				else if (suffix === "Keening") {
 					baseSet = "Daedric";
 					goldOffset = 50000;
 					goldMult = 0;
-				}
-				// else if (suffix === "RedEaglesBane") {
-				// 	baseSet =
-				// }
-				// else if (suffix === "RedEaglesFury") {
-				// 	baseSet =
-				// }
-				else if (suffix === "Windshear") {
-					baseSet = "Redguard";
-				}
-				else if (suffix === "Rune") {
-					baseSet = "Dawnguard";
+					damageOffset += 1;
 				}
 				else if (suffix === "Longhammer") {
-					baseSet = "Orcish";
+					baseSet = "Iron";
+					weightOffset -= 4;
+					speedOffset += 0.2;
+				}
+				else if (suffix === "MehrunesRazor") {
+					baseSet = "Ebony";
+					goldOffset = 100000;
+					goldMult = 0;
+				}
+				else if (suffix === "Miraak") {
+					baseSet = "Daedric";
+					goldOffset = 100000;
+					goldMult = 0;
+					damageOffset += 1;
+					reachOffset += 0.2;
+				}
+				else if (suffix === "MolagBal") {
+					baseSet = "Ebony";
+					goldOffset = 100000;
+					goldMult = 0;
+					weightOffset = 4;
+				}
+				else if (suffix === "Nettlebane") {
+					baseSet = "Ebony";
+					goldOffset += 2000;
+					goldMult = 0;
+				}
+				else if (suffix === "Nightingale") {
+					baseSet = "Ebony";
+					goldOffset = 15000;
+					goldMult = 0;
+				}
+				else if (suffix === "Okin") {
+					baseSet = "NordHero";
+				}
+				else if (suffix === "QueenFreydis") {
+					baseSet = "Iron";
+					goldOffset = 500;
+					goldMult = 0;
+				}
+				else if (suffix === "RuefulAxe") {
+					baseSet = "Silver";
+					goldOffset = 100000;
+					goldMult = 0;
+					damageOffset += 3;
+				}
+				else if (suffix === "RedEaglesBane") {
+					baseSet = "Forsworn";
+					goldOffset = 1000;
+					goldMult = 0;
+					damageOffset += 5;
+				}
+				else if (suffix === "RedEaglesFury") {
+					baseSet = "Forsworn";
+				}
+				else if (suffix === "Soulrender") {
+					baseSet = "Ebony";
+					goldOffset = 15000;
+					goldMult = 0;
+					weightOffset -= 1;
+				}
+				else if (suffix === "Stormbringer") {
+					baseSet = "Ebony";
+					goldOffset = 15000;
+					goldMult = 0;
+				}
+				else if (suffix === "Stormfang") {
+					baseSet = "Nordic";
+					speedOffset += 0.05;
+				}
+				else if (suffix === "ThePaleBlade") {
+					baseSet = "NordHero";
+				}
+				else if (suffix === "Valdr") {
+					baseSet = "Steel";
 				}
 				else if (suffix === "Volendrung") {
+					baseSet = "Ebony";
+					goldOffset = 100000;
+					goldMult = 0;
+					weightOffset += 7;
+				}
+				else if (suffix === "Windshear") {
+					baseSet = "Redguard";
+					damageOffset += 3;
+				}
+				else if (suffix === "WoodsmansFriend") {
+					baseSet = "Iron";
+				}
+				else if (suffix === "Wuuthrad") {
 					baseSet = "Ebony";
 					goldOffset = 50000;
 					goldMult = 0;
 				}
-				else if (suffix === "Kyne") {
-					baseSet = "Nordic";
-				}
-				else if (suffix === "Miraak") {
-					baseSet = "Ebony";
-				}
-				else if (suffix === "Bloodskal") {
-					baseSet = "Silver";
-				}
 				// Royal Armory
+				else if (suffix === "AldmeriSword") {
+					baseSet = "Elven";
+					goldMult *= 10;
+				}
 				else if (suffix === "BlackBriar") {
 					baseSet = "Ebony";
 				}
@@ -161,10 +244,6 @@ for (const weapon of selected) {
 				}
 				else if (suffix === "Esbern") {
 					baseSet = "Blades";
-				}
-				else if (suffix === "AldmeriSword") {
-					baseSet = "Elven";
-					goldMult *= 10;
 				}
 				else if (suffix === "FoeBreaker") {
 					baseSet = "SkyforgeSteel";
@@ -256,6 +335,9 @@ for (const weapon of selected) {
 				}
 				else if (set === "Hoth") {
 					baseSet = "Orcish";
+				}
+				else if (set === "ImperialLoyalist") {
+					baseSet = "Nordic";
 				}
 				else {
 					baseSet = set;
@@ -483,6 +565,10 @@ for (const weapon of selected) {
 				speedOffset += 0.15;
 				staggerOffset -= 0.25;
 			}
+			else if (type === "Scimitar") {
+				baseType = "Sword";
+				speedOffset += 0.05;
+			}
 			else if (type === "Shortspear") {
 				baseType = "Sword";
 			}
@@ -532,12 +618,12 @@ for (const weapon of selected) {
 					xelib.SetGoldValue(weapon, gold);
 				}
 				// Weight
-				const weight = xelib.GetWeight(baseWeapon) * weightMult + weightOffset;
+				let weight = xelib.GetWeight(baseWeapon) * weightMult + weightOffset;
 				if (Math.abs(weight - xelib.GetWeight(weapon)) > 0.001) {
 					xelib.SetWeight(weapon, weight);
 				}
 				// Damage
-				let damage = xelib.GetDamage(baseWeapon) * damageMult + damageOffset;
+				let damage = xelib.GetDamage(baseWeapon) + damageOffset;
 				const criticalDamage = Math.trunc(damage / 2);
 				if (!Number.isInteger(damage)) {
 					damage *= 6;
