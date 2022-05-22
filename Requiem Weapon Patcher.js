@@ -431,7 +431,7 @@ for (const weapon of selected) {
 			else if (baseSet === "Glass") {
 				baseSet = "Steel";
 				damageOffset += 4;
-				weightOffset += -3;
+				weightOffset += -1;
 				goldMult *= 25;
 			}
 			else if (baseSet === "Imperial") {

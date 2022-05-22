@@ -1,5 +1,5 @@
 const selected = zedit.GetSelectedRecords("ARMO");
-// const selected = xelib.GetRecords(xelib.FileByName("RRO-815.esp"), "ARMO", true);
+// const selected = xelib.GetRecords(xelib.FileByName("Requiem - Armor Seasdfts.esp"), "ARMO", true);
 
 const {showProgress, logMessage, progressTitle, addProgress, progressMessage} = zedit.progressService;
 showProgress({
@@ -86,17 +86,11 @@ function buildArmorOffsetValues() {
 	map.set("Heavy_Guard_Body_ThePale", new ArmorValues(-50, -5, -100));
 	map.set("Heavy_Guard_Body_TheRift", new ArmorValues(-50, -5, -100));
 	map.set("Heavy_Guard_Body_Winterhold", new ArmorValues(-50, -5, -100));
-	map.set("Heavy_Iron_Body_Pauldrons", new ArmorValues(30, 2.5, 75));
-	map.set("Heavy_Iron_Shield_Banded", new ArmorValues(10, 2, 40));
-	map.set("Light_Chitin_Shield", new ArmorValues(5, 2, 0));
-	map.set("Light_Fur_Body_Kilt", new ArmorValues(-50, -2, -20));
-	map.set("Light_Fur_Body_KiltWithMantle", new ArmorValues(-50, -2, -20));
-	map.set("Light_Hide_Body_Studded", new ArmorValues(25, 1, 25));
 	map.set("Light_Imperial_Body_Studded", new ArmorValues(25, 1, 25));
-	map.set("Light_Imperial_Body_Tullius", new ArmorValues(50, 0, 3000));
-	map.set("Light_Vampire_Body_Harkon", new ArmorValues(60, 3, 500));
-	map.set("Light_Vampire_Body_Royal", new ArmorValues(60, 3, 500));
-	map.set("Light_Vampire_Body_Valerica", new ArmorValues(60, 3, 500));
+	map.set("Light_Imperial_Body_Tullius", new ArmorValues(50, 2, 3000));
+	map.set("Light_Vampire_Body_Harkon", new ArmorValues(50, 2, 500));
+	map.set("Light_Vampire_Body_Royal", new ArmorValues(50, 2, 500));
+	map.set("Light_Vampire_Body_Valerica", new ArmorValues(50, 2, 500));
 	return map;
 }
 
@@ -119,52 +113,59 @@ function buildArmorSetValues() {
  * @param {Map<String, ArmorValues>} map - The keys are type + set separated by '_'.
  */
 function buildArmorSetValuesBase(map) {
-	map.set("Heavy_Aetherium", new ArmorValues(900, 75, 50000));
-	map.set("Heavy_Ahzidal", new ArmorValues(550, 40, 5000));
-	map.set("Heavy_AncientNord", new ArmorValues(550, 40, 300));
+	map.set("Heavy_Aetherium", new ArmorValues(1000, 80, 50000));
+	map.set("Heavy_Ahzidal", new ArmorValues(700, 50, 5000));
+	map.set("Heavy_AncientNord", new ArmorValues(600, 50, 300));
 	map.set("Heavy_Blades", new ArmorValues(700, 50, 2500));
-	map.set("Heavy_Chitin", new ArmorValues(600, 35, 1000));
+	map.set("Heavy_Bonemold", new ArmorValues(600, 40, 1000));
 	map.set("Heavy_Daedric", new ArmorValues(1200, 100, 50000));
-	map.set("Heavy_Dawnguard", new ArmorValues(700, 55, 1000));
-	map.set("Heavy_Dragonplate", new ArmorValues(900, 65, 20000));
-	map.set("Heavy_Dwarven", new ArmorValues(780, 70, 2000));
-	map.set("Heavy_Ebony", new ArmorValues(900, 75, 10000));
-	map.set("Heavy_Falmer", new ArmorValues(600, 40, 100));
-	map.set("Heavy_FalmerHardened", new ArmorValues(720, 60, 400));
-	map.set("Heavy_FalmerHeavy", new ArmorValues(720, 60, 400));
+	map.set("Heavy_Dawnguard", new ArmorValues(700, 50, 1000));
+	map.set("Heavy_Dragonplate", new ArmorValues(1000, 70, 20000));
+	map.set("Heavy_Dwarven", new ArmorValues(900, 70, 2000));
+	map.set("Heavy_Ebony", new ArmorValues(1000, 80, 10000));
+	map.set("Heavy_FalmerHardened", new ArmorValues(800, 60, 400));
+	map.set("Heavy_FalmerHeavy", new ArmorValues(800, 60, 400));
 	map.set("Heavy_Guard", new ArmorValues(600, 50, 500));
 	map.set("Heavy_Imperial", new ArmorValues(600, 50, 500));
-	map.set("Heavy_Iron", new ArmorValues(510, 40, 250));
-	map.set("Heavy_Nordic", new ArmorValues(720, 60, 1000));
-	map.set("Heavy_Orcish", new ArmorValues(720, 60, 1500));
+	map.set("Heavy_ImperialLegate", new ArmorValues(700, 50, 1000));
+	map.set("Heavy_ImprovedBonemold", new ArmorValues(700, 50, 1500));
+	map.set("Heavy_Iron", new ArmorValues(500, 40, 250));
+	map.set("Heavy_NordicCarved", new ArmorValues(800, 60, 1000));
+	map.set("Heavy_Orcish", new ArmorValues(800, 60, 1500));
+	map.set("Heavy_Stalhrim", new ArmorValues(1000, 80, 10000));
 	map.set("Heavy_Steel", new ArmorValues(600, 50, 500));
+	map.set("Heavy_SteelPlate", new ArmorValues(800, 60, 1000));
 	map.set("Heavy_StormcloakOfficer", new ArmorValues(600, 50, 500));
-	map.set("Heavy_SteelPlate", new ArmorValues(720, 60, 1000));
-	map.set("Heavy_Ulfric", new ArmorValues(720, 60, 5000));
-	map.set("Heavy_Vigilant", new ArmorValues(720, 60, 1000));
-	map.set("Heavy_Wolf", new ArmorValues(720, 50, 5000));
+	map.set("Heavy_Vigilant", new ArmorValues(800, 60, 1000));
+	map.set("Heavy_Wolf", new ArmorValues(800, 50, 5000));
 	map.set("Light_Alikr", new ArmorValues(300, 10, 300));
-	map.set("Light_AncientShrouded", new ArmorValues(360, 12, 400));
-	map.set("Light_Chitin", new ArmorValues(360, 15, 800));
-	map.set("Light_Dawnguard", new ArmorValues(360, 15, 600));
-	map.set("Light_Dragonscale", new ArmorValues(480, 20, 16000));
-	map.set("Light_Elven", new ArmorValues(360, 15, 800));
+	map.set("Light_AncientShrouded", new ArmorValues(350, 12, 400));
+	map.set("Light_Chitin", new ArmorValues(400, 25, 800));
+	map.set("Light_Dawnguard", new ArmorValues(500, 30, 600));
+	map.set("Light_Dragonscale", new ArmorValues(600, 30, 16000));
+	map.set("Light_Elven", new ArmorValues(400, 15, 800));
+	map.set("Light_Executioner", new ArmorValues(300, 10, 200));
+	map.set("Light_Falmer", new ArmorValues(250, 15, 100));
 	map.set("Light_Forsworn", new ArmorValues(250, 8, 100));
 	map.set("Light_Fur", new ArmorValues(250, 8, 100));
-	map.set("Light_Glass", new ArmorValues(480, 15, 6000));
+	map.set("Light_Glass", new ArmorValues(600, 40, 6000));
 	map.set("Light_Guard", new ArmorValues(300, 15, 400));
 	map.set("Light_Hide", new ArmorValues(250, 8, 100));
 	map.set("Light_Imperial", new ArmorValues(300, 10, 200));
 	map.set("Light_Leather", new ArmorValues(300, 10, 200));
 	map.set("Light_Linwe", new ArmorValues(300, 10, 200));
-	map.set("Light_Nightingale", new ArmorValues(360, 12, 50000));
-	map.set("Light_PenitusOculatus", new ArmorValues(360, 12, 600));
-	map.set("Light_Scaled", new ArmorValues(360, 15, 400));
+	map.set("Light_MoragTong", new ArmorValues(500, 30, 5000));
+	map.set("Light_Nightingale", new ArmorValues(350, 12, 10000));
+	map.set("Light_PenitusOculatus", new ArmorValues(500, 12, 600));
+	map.set("Light_ReinforcedChitin", new ArmorValues(450, 35, 1000));
+	map.set("Light_Scale", new ArmorValues(500, 20, 400));
 	map.set("Light_Shrouded", new ArmorValues(300, 10, 200));
-	map.set("Light_SnowElf", new ArmorValues(480, 15, 8000));
-	map.set("Light_Stalhrim", new ArmorValues(480, 15, 6000));
+	map.set("Light_Skaal", new ArmorValues(300, 10, 400));
+	map.set("Light_SnowElf", new ArmorValues(500, 15, 8000));
+	map.set("Light_Stalhrim", new ArmorValues(600, 40, 6000));
 	map.set("Light_ThievesGuild", new ArmorValues(300, 10, 200));
-	map.set("Light_ThievesGuildMaster", new ArmorValues(360, 12, 1000));
+	map.set("Light_ThievesGuildMaster", new ArmorValues(350, 12, 1000));
+	map.set("Light_Ulfric", new ArmorValues(350, 12, 5000));
 	map.set("Light_Vampire", new ArmorValues(300, 10, 200));
 }
 
@@ -172,37 +173,17 @@ function buildArmorSetValuesMods(map) {
 	// ESO Altmer
 	map.set("Light_Altmer", map.get("Light_Glass"));
 
-	// Black Mage
-	const glass = map.get("Light_Glass");
-	const lightBlackArchMage = new ArmorValues(
-		glass.armorRating,
-		glass.weight * 0.8,
-		50000
-	);
-	const ebony = map.get("Heavy_Ebony");
-	const heavyBlackArchMage = new ArmorValues(
-		ebony.armorRating,
-		ebony.weight * 0.8,
-		50000
-	);
-	map.set("Heavy_BlackArchMage", heavyBlackArchMage);
-	map.set("Heavy_BlackMage", map.get("Heavy_SteelPlate"));
-	map.set("Light_BlackArchMage", lightBlackArchMage);
-	map.set("Light_BlackMage", map.get("Light_Scaled"));
-
 	// Blood Witch
 	map.set("Light_BloodWitch", map.get("Light_Glass"));
 
-	// Chainmail
-	map.set("Light_Mail", new ArmorValues(360, 20, 300));
-
 	// Civil War (Artifacts Rebalance)
-	map.set("Heavy_Stormblade", new ArmorValues(720, 60, 5000));
-	map.set("Heavy_ImperialLegate", new ArmorValues(720, 60, 5000));
-	map.set("Light_Ulfric", new ArmorValues(360, 15, 5000));
+	map.set("Heavy_Stormblade", new ArmorValues(800, 60, 5000));
+
+	// Common Clothes and Armors
+	map.set("Light_Mail", map.get("Light_Scale"));
 
 	// Divine Wrath
-	map.set("Heavy_DivineWrath", new ArmorValues(800, 60, 8000));
+	map.set("Heavy_DivineWrath", new ArmorValues(900, 60, 8000));
 
 	// Hoth
 	map.set("Heavy_Hoth", map.get("Heavy_Iron"));
@@ -210,29 +191,24 @@ function buildArmorSetValuesMods(map) {
 	// Imperial Assassin
 	map.set("Light_ImperialAssassin", map.get("Light_Leather"));
 
-	// Nord Battlemage
-	map.set("Heavy_NordBattlemage", map.get("Heavy_SteelPlate"));
-	map.set("Light_NordMage", map.get("Light_Scaled"));
-
 	// Nord Scale
-	map.set("Light_Scale", map.get("Light_Scaled"));
-	map.set("Light_NordicScale", map.get("Light_Scaled"));
+	map.set("Light_NordicScale", map.get("Light_Scale"));
 
 	// Practical Pirate
 	map.set("Light_Pirate", map.get("Light_Leather"));
 	map.set("Light_DarkPirate", map.get("Light_Pirate"));
 
 	// Rough Leather
-	map.set("Light_RoughLeather", map.get("Light_Guard"));
+	map.set("Light_RoughLeather", map.get("Light_Scale"));
 	map.set("Light_Blackguard", map.get("Light_RoughLeather"));
 
 	// Runic (Witchplate)
 	const steel = map.get("Heavy_Steel");
-	const steelPlate = map.get("Heavy_SteelPlate");
+	const nordicCarved = map.get("Heavy_NordicCarved");
 	const runicArmor = new ArmorValues(
-		steelPlate.armorRating,
+		nordicCarved.armorRating,
 		steel.weight,
-		steelPlate.gold
+		nordicCarved.gold
 	);
 	map.set("Heavy_Runic", runicArmor);
 
@@ -241,12 +217,12 @@ function buildArmorSetValuesMods(map) {
 	map.set("Light_ImperialLoyalist", map.get("Light_PenitusOculatus"));
 
 	// Ulag's Legacy
-	map.set("Heavy_Blooded", new ArmorValues(800, 60, 3000));
-	map.set("Light_Apotheus", new ArmorValues(360, 10, 1000));
-	map.set("Light_Duskward", new ArmorValues(480, 20, 2000));
+	map.set("Heavy_Blooded", new ArmorValues(900, 60, 3000));
+	map.set("Light_Apotheus", new ArmorValues(500, 10, 1000));
+	map.set("Light_Duskward", new ArmorValues(600, 40, 2000));
 
 	// Warmonger Armory
-	map.set("Heavy_NordHero", map.get("Heavy_Nordic"));
+	map.set("Heavy_NordHero", map.get("Heavy_SteelPlate"));
 	map.set("Heavy_Pathfinder", map.get("Heavy_Steel"));
 	map.set("Heavy_SoulRipper", map.get("Heavy_Ebony"));
 	map.set("Heavy_WanderingKnight", map.get("Heavy_Vigilant"));
@@ -340,7 +316,7 @@ function getArmorValues(type, set, part, suffix) {
  * @returns {ArmorValues} armorValues - If the armor values cannot be determined, null is returned instead.
  */
 function getArtifactValues(artifact) {
-	if (artifact === "AetherialShield") {
+	if ( artifact === "AetheriumShield" || artifact === "AetherialShield") {
 		const armorValues = getArmorValues("Heavy", "Aetherium", "Shield");
 		armorValues.gold = 50000;
 		return armorValues;
@@ -351,9 +327,19 @@ function getArtifactValues(artifact) {
 		armorValues.gold = 100000;
 		return armorValues;
 	}
-	if (artifact === "DawnguardRuneShield") {
+	if (artifact === "DawnguardRuneShield" || artifact === "AncientDawnguardShield") {
 		const armorValues = getArmorValues("Heavy", "Dawnguard", "Shield");
 		armorValues.gold = 5000;
+		return armorValues;
+	}
+	if (artifact.match(/^DragonPriest_(.+)Heavy$/)) {
+		const armorValues = getArmorValues("Heavy", "Dragonplate", "Head");
+		armorValues.gold = 25000;
+		return armorValues;
+	}
+	if (artifact.match(/^DragonPriest_(.+)Light$/)) {
+		const armorValues = getArmorValues("Light", "Dragonscale", "Head");
+		armorValues.gold = 25000;
 		return armorValues;
 	}
 	if (artifact === "EbonyMail") {
@@ -374,7 +360,7 @@ function getArtifactValues(artifact) {
 		return armorValues;
 	}
 	if (artifact === "SaviorsHide") {
-		const armorValues = getArmorValues("Light", "Scaled", "Body");
+		const armorValues = getArmorValues("Light", "Scale", "Body");
 		armorValues.gold = 100000;
 		return armorValues;
 	}
@@ -400,6 +386,11 @@ function getArtifactValues(artifact) {
 		armorValues.gold = 300;
 		return armorValues;
 	}
+	if (artifact === "VisageOfMzund") {
+		const armorValues = getArmorValues("Heavy", "Dwarven", "Head");
+		armorValues.gold = 5000;
+		return armorValues;
+	}
 	return null;
 }
 
@@ -411,24 +402,23 @@ function getArtifactValues(artifact) {
  * @returns {Number} armorRating - Armor rating of the part or -1 if the part cannot be determined.
  */
 function GetArmorRatingForBodyPart(setArmorRating, part) {
-	const headArmorRating = Math.round(setArmorRating * 0.2);
+	if (setArmorRating % 50 !== 0) {
+		xelib.logMessage(`${setArmorRating} is not a multiple of 50`)
+	}
 	if (part === "Head") {
-		return headArmorRating;
+		return setArmorRating * 0.2;
 	}
-	const feetArmorRating = Math.round(setArmorRating * 0.15);
 	if (part === "Feet") {
-		return feetArmorRating;
+		return Math.ceil(setArmorRating * 0.15);
 	}
-	const handArmorRating = Math.round(setArmorRating * 0.15);
 	if (part === "Hands") {
-		return handArmorRating;
+		return Math.floor(setArmorRating * 0.15);
 	}
-	const bodyArmorRating = setArmorRating - headArmorRating - feetArmorRating - handArmorRating;
 	if (part === "Body") {
-		return bodyArmorRating;
+		return setArmorRating * 0.5;
 	}
 	if (part === "Shield") {
-		return Math.round(setArmorRating * 0.3);
+		return setArmorRating * 0.3;
 	}
 	return -1;
 }

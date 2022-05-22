@@ -13,30 +13,30 @@ showProgress({
     max: armors.length
 });
 
-const bluntKeywords = ["REQ_KW_Armor_Resistance_Blunt_None",
-                       "REQ_KW_Armor_Resistance_Blunt_Tier1",
-                       "REQ_KW_Armor_Resistance_Blunt_Tier2",
-                       "REQ_KW_Armor_Resistance_Blunt_Tier3",
-                       "REQ_KW_Armor_Resistance_Blunt_Tier4",
-                       "REQ_KW_Armor_Resistance_Blunt_Tier5"];
-const pierceKeywords = ["REQ_KW_Armor_Resistance_Pierce_None",
-                        "REQ_KW_Armor_Resistance_Pierce_Tier1",
-                        "REQ_KW_Armor_Resistance_Pierce_Tier2",
-                        "REQ_KW_Armor_Resistance_Pierce_Tier3",
-                        "REQ_KW_Armor_Resistance_Pierce_Tier4",
-                        "REQ_KW_Armor_Resistance_Pierce_Tier5"];
-const rangedKeywords = ["REQ_KW_Armor_Resistance_Ranged_None",
-                        "REQ_KW_Armor_Resistance_Ranged_Tier1",
-                        "REQ_KW_Armor_Resistance_Ranged_Tier2",
-                        "REQ_KW_Armor_Resistance_Ranged_Tier3",
-                        "REQ_KW_Armor_Resistance_Ranged_Tier4",
-                        "REQ_KW_Armor_Resistance_Ranged_Tier5"];
-const slashKeywords = ["REQ_KW_Armor_Resistance_Slash_None",
-                       "REQ_KW_Armor_Resistance_Slash_Tier1",
-                       "REQ_KW_Armor_Resistance_Slash_Tier2",
-                       "REQ_KW_Armor_Resistance_Slash_Tier3",
-                       "REQ_KW_Armor_Resistance_Slash_Tier4",
-                       "REQ_KW_Armor_Resistance_Slash_Tier5"];
+const bluntKeywords = ["REQ_Armor_Resistance_Blunt_None",
+                       "REQ_Armor_Resistance_Blunt_Tier1",
+                       "REQ_Armor_Resistance_Blunt_Tier2",
+                       "REQ_Armor_Resistance_Blunt_Tier3",
+                       "REQ_Armor_Resistance_Blunt_Tier4",
+                       "REQ_Armor_Resistance_Blunt_Tier5"];
+const pierceKeywords = ["REQ_Armor_Resistance_Pierce_None",
+                        "REQ_Armor_Resistance_Pierce_Tier1",
+                        "REQ_Armor_Resistance_Pierce_Tier2",
+                        "REQ_Armor_Resistance_Pierce_Tier3",
+                        "REQ_Armor_Resistance_Pierce_Tier4",
+                        "REQ_Armor_Resistance_Pierce_Tier5"];
+const rangedKeywords = ["REQ_Armor_Resistance_Ranged_None",
+                        "REQ_Armor_Resistance_Ranged_Tier1",
+                        "REQ_Armor_Resistance_Ranged_Tier2",
+                        "REQ_Armor_Resistance_Ranged_Tier3",
+                        "REQ_Armor_Resistance_Ranged_Tier4",
+                        "REQ_Armor_Resistance_Ranged_Tier5"];
+const slashKeywords = ["REQ_Armor_Resistance_Slash_None",
+                       "REQ_Armor_Resistance_Slash_Tier1",
+                       "REQ_Armor_Resistance_Slash_Tier2",
+                       "REQ_Armor_Resistance_Slash_Tier3",
+                       "REQ_Armor_Resistance_Slash_Tier4",
+                       "REQ_Armor_Resistance_Slash_Tier5"];
 const temperingKeywords = ["REQ_Tempering_AdvancedBlacksmithing",
                            "REQ_Tempering_AdvancedLightArmors",
                            "REQ_Tempering_Craftsmanship",
@@ -46,7 +46,8 @@ const temperingKeywords = ["REQ_Tempering_AdvancedBlacksmithing",
                            "REQ_Tempering_EbonySmithing",
                            "REQ_Tempering_ElvenSmithing",
                            "REQ_Tempering_GlassSmithing",
-                           "REQ_Tempering_OrcishSmithing"];
+                           "REQ_Tempering_OrcishSmithing",
+                           "REQ_Tempering_LegendaryBlacksmithing"];
 
 for (let armor of armors) {
 	armor = xelib.GetWinningOverride(armor);
@@ -54,11 +55,11 @@ for (let armor of armors) {
 	if (!hasTemplate) {
 		if (xelib.HasKeyword(armor, "ArmorCuirass")) {
 			const bluntCount = getKeywordCount(armor, bluntKeywords);
-			if (bluntCount !== 1) {
+			if (bluntCount !== 0) {
 				logMessage(`${xelib.LongName(armor)} has ${bluntCount} blunt resistance keywords`);
 			}
 			const pierceCount = getKeywordCount(armor, pierceKeywords);
-			if (pierceCount !== 1) {
+			if (pierceCount !== 0) {
 				logMessage(`${xelib.LongName(armor)} has ${pierceCount} pierce resistance keywords`);
 			}
 			const rangedCount = getKeywordCount(armor, rangedKeywords);
@@ -66,7 +67,7 @@ for (let armor of armors) {
 				logMessage(`${xelib.LongName(armor)} has ${rangedCount} ranged resistance keywords`);
 			}
 			const slashCount = getKeywordCount(armor, slashKeywords);
-			if (slashCount !== 1) {
+			if (slashCount !== 0) {
 				logMessage(`${xelib.LongName(armor)} has ${slashCount} slash resistance keywords`);
 			}
 		}
